@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Garage
 {
-    abstract class Engine
+    public abstract class Engine
     {
+        // Enums:
+        public enum eEngineType
+        {
+            Gas = 0,
+            Electric = 1
+        }
     }
 }
