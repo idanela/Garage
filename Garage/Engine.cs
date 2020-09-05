@@ -5,10 +5,9 @@ namespace Ex03.GarageLogic
 {
     public abstract class Engine
     {
-        // Adding this line just to check changes! (delete me).
         // Data Member:
         protected float m_CurrentAmountOfEnergy;
-        protected readonly float m_MaxCapacityEnergy;
+        protected readonly float r_MaxCapacityEnergy;
 
         // Enums:
         public enum eEngineType
@@ -21,7 +20,7 @@ namespace Ex03.GarageLogic
         protected Engine(float iCurrentCapacityEnergy, float i_MaxCapacityEnergy)
         {
             m_CurrentAmountOfEnergy = iCurrentCapacityEnergy;
-            m_MaxCapacityEnergy = i_MaxCapacityEnergy;
+            r_MaxCapacityEnergy = i_MaxCapacityEnergy;
         }
 
         // Properties:
@@ -41,11 +40,21 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_MaxCapacityEnergy;
+                return r_MaxCapacityEnergy;
             }
         }
 
         // Methods:
-        protected abstract void FillUpEnergy(float i_EnergyAmountToFill, string i_GasType);
+        protected virtual void FillUpEnergy(float i_EnergyAmountToFill, string i_GasType)
+        {
+            if (CurrentCapacityEnergy + i_EnergyAmountToFill < MaxCapacityEnergy)
+            {
+                m_CurrentAmountOfEnergy += i_EnergyAmountToFill;
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(i_EnergyAmountToFill);
+            }
+        }
     }
 }

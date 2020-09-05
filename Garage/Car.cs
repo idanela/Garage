@@ -8,7 +8,6 @@ namespace Ex03.GarageLogic
 {
     public sealed class Car : Vehicle
     {
-        //
         public enum eColorOfCar
         {
             Gray,

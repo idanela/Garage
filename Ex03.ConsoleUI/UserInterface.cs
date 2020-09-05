@@ -1,19 +1,24 @@
 ﻿
 using System;
-using Garage;
+using System.Collections.Generic;
+using System.Dynamic;
+using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    internal struct UserInterface
+    internal class UserInterface
     {
         // Data Memebers:
-        // Garage m_Garage;
+        private readonly Garage r_Garage = new Garage();
 
-        // Constructors:
-        //public UserInterface()
-        //{
-        //    // m_Garage = new Garage();
-        //}
+        // Properties:
+        public Garage Garage
+        {
+            get
+            {
+                return r_Garage;
+            }
+        }
 
         // Enums:
         private enum eMenuOption
@@ -73,6 +78,42 @@ namespace Ex03.ConsoleUI
 7. Show vehicle details.");
 
             Console.WriteLine(menuOptions);
+        }
+
+        public static void AddVehicle(
+            out string o_LicenseNumber,
+            out string o_Model,
+            out Engine.eEngineType o_EngineType,
+            out ManufectureVehicle.eVehicleType o_VehicleType)
+        {
+            Console.WriteLine("Please enter the engine type:");
+            o_LicenseNumber = Console.ReadLine();
+            Console.WriteLine("Please enter the model:");
+            o_Model = Console.ReadLine();
+            Console.WriteLine("Please enter the license number:");
+            Engine.eEngineType.TryParse(Console.ReadLine(), out o_EngineType);
+            Console.WriteLine("Please enter the type of your vehicle:");
+            ManufectureVehicle.eVehicleType.TryParse(Console.ReadLine(), out o_VehicleType);
+        }
+
+        public static void GetCarProperties(out ushort o_NumOfDoors, out Car.eColorOfCar o_CarColor)
+        {
+            Console.WriteLine("Please enter the number of doors:");
+            o_NumOfDoors = ushort.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the color of the car:");
+            Car.eColorOfCar.TryParse(Console.ReadLine(), out o_CarColor);
+        }
+
+        public static void GetBikeProperties(out string o_LicenseType, out int o_EngineVolume)
+        {
+            Console.WriteLine("Please enter the license type:");
+            o_LicenseType = Console.ReadLine();
+            Console.WriteLine("Please enter the engine volume:");
+            o_EngineVolume = int.Parse(Console.ReadLine());
+        }
+
+        private static List<string> getTruckProperties()
+        {
         }
 
         private static void insertNewCar()

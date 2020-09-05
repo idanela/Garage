@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         public const float k_TruckeTank = 105;
 
         // Data Members:
-        private readonly string m_GasType;
+        private readonly string r_GasType;
 
         // Enums:
         public enum eGasType
@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
         // Constructors:
         public GasEngine(float i_CurrentAmountOfFuel, float i_MaxCapacity, string i_GasType) : base(i_CurrentAmountOfFuel, i_MaxCapacity)
         {
-            m_GasType = i_GasType;
+            r_GasType = i_GasType;
         }
 
         // Properties:
@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_GasType;
+                return r_GasType;
             }
         }
 
@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
         protected override void FillUpEnergy(float i_EnergyAmountToFill, string i_GasType)
         {
             containSameFuelType(i_GasType);
-            FuelEngine(i_EnergyAmountToFill);
+            base.FillUpEnergy(i_EnergyAmountToFill, i_GasType);
         }
 
         private void containSameFuelType(string i_GasType)
@@ -49,18 +49,6 @@ namespace Ex03.GarageLogic
             if (i_GasType != GasType)
             {
                 throw new ArgumentException("Incorrect fuel type, engine's fuel type that was entered is ", i_GasType);
-            }
-        }
-
-        private void FuelEngine(float i_EnergyAmountToFill)
-        {
-            if (CurrentCapacityEnergy + i_EnergyAmountToFill < MaxCapacityEnergy)
-            {
-                CurrentCapacityEnergy += i_EnergyAmountToFill;
-            }
-            else
-            {
-                // throw new ValueOutOfRangeException.
             }
         }
 

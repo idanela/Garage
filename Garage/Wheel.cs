@@ -4,9 +4,9 @@ namespace Ex03.GarageLogic
     public struct Wheel
     {
         // Data Members:
-        private readonly string m_Manufacturer;
+        private readonly string r_Manufacturer;
         private float m_CurrentAirPressure;
-        private readonly float m_MaxAirPressure;
+        private readonly float r_MaxAirPressure;
 
         // Enums:
         public enum eWheelsPerVehicle
@@ -26,9 +26,9 @@ namespace Ex03.GarageLogic
         // Constructors:
         public Wheel(string i_Manufacturer, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
-            m_Manufacturer = i_Manufacturer;
+            r_Manufacturer = i_Manufacturer;
             m_CurrentAirPressure = i_CurrentAirPressure;
-            m_MaxAirPressure = i_MaxAirPressure;
+            r_MaxAirPressure = i_MaxAirPressure;
         }
 
         // Properties:
@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_Manufacturer;
+                return r_Manufacturer;
             }
         }
 
@@ -56,7 +56,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_MaxAirPressure;
+                return r_MaxAirPressure;
             }
         }
 
@@ -71,7 +71,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                // throw new ValutOutOfRangeException();
+                throw new ValueOutOfRangeException(i_AirPressure);
             }
         }
 
