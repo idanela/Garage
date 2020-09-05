@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Garage
+namespace Ex03.GarageLogic
 {
     public sealed class GasEngine : Engine
     {

@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Garage
+namespace Ex03.GarageLogic
 {
     public abstract class Engine
     {
