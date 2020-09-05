@@ -8,6 +8,7 @@ namespace Garage
 {
     public sealed class Car : Vehicle
     {
+        //
         public enum eColorOfCar
         {
             Gray,
