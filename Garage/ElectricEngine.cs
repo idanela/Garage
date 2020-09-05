@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         protected override void FillUpEnergy(float i_EnergyAmountToFill, string i_GasType = null)
         {
             hasNoGas(i_GasType);
-            chargeEngine(i_EnergyAmountToFill);
+            base.FillUpEnergy(i_EnergyAmountToFill, null);
         }
 
         private void hasNoGas(string i_GasType)
@@ -26,18 +26,6 @@ namespace Ex03.GarageLogic
             if (i_GasType != null)
             {
                 throw new ArgumentException("Electric engine does not use gas. Gas type was ", i_GasType);
-            }
-        }
-
-        private void chargeEngine(float i_AmountToCharge)
-        {
-            if (CurrentCapacityEnergy + i_AmountToCharge < MaxCapacityEnergy)
-            {
-                CurrentCapacityEnergy += i_AmountToCharge;
-            }
-            else
-            {
-                // throw new ValueOutOfRangeException.
             }
         }
 
