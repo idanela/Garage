@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Garage
 {
-    class Car
+    public sealed class Car : Vehicle
     {
-        //
         public enum eColorOfCar
         {
             Gray,
