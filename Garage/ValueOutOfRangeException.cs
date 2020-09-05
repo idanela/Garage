@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Garage
+namespace Ex03.GarageLogic
 {
     class ValueOutOfRangeException
     {

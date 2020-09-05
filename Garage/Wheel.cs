@@ -1,5 +1,5 @@
 ﻿
-namespace Garage
+namespace Ex03.GarageLogic
 {
     public struct Wheel
     {
