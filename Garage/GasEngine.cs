@@ -46,22 +46,33 @@ namespace Garage
 
         private void containSameFuelType(string i_GasType)
         {
-            if (i_GasType != m_GasType)
+            if (i_GasType != GasType)
             {
-                throw new ArgumentException("Incorrect fuel type, engine's fuel type that was entered is ", i_FuelType);
+                throw new ArgumentException("Incorrect fuel type, engine's fuel type that was entered is ", i_GasType);
             }
         }
 
         private void FuelEngine(float i_EnergyAmountToFill)
         {
-            if (m_CurrentAmountOfEnergy + i_EnergyAmountToFill < m_MaxCapacityEnergy)
+            if (CurrentCapacityEnergy + i_EnergyAmountToFill < MaxCapacityEnergy)
             {
-                m_CurrentAmountOfEnergy += i_EnergyAmountToFill;
+                CurrentCapacityEnergy += i_EnergyAmountToFill;
             }
             else
             {
                 // throw new ValueOutOfRangeException.
             }
+        }
+
+        // Object Overrides:
+        public override string ToString()
+        {
+            return string.Format(
+@"
+Gas Type: {0}.
+Remain Liters of Gas: {1}.",
+GasType,
+CurrentCapacityEnergy);
         }
     }
 }
