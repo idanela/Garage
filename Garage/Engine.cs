@@ -5,6 +5,7 @@ namespace Garage
 {
     public abstract class Engine
     {
+        // Adding this line just to check changes! (delete me).
         // Data Member:
         protected float m_CurrentAmountOfEnergy;
         protected readonly float m_MaxCapacityEnergy;
