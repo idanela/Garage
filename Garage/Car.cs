@@ -42,8 +42,9 @@ namespace Garage
             {
                 return m_ColorOfCar;
             }
-        }
 
+            ///CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+        }
     }
 }
         
