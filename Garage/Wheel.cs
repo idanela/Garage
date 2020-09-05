@@ -8,6 +8,21 @@ namespace Garage
         private float m_CurrentAirPressure;
         private readonly float m_MaxAirPressure;
 
+        // Enums:
+        public enum eWheelsPerVehicle
+        {
+            Bike = 2,
+            Car = 4,
+            Truck = 16
+        }
+
+        public enum eMaxAirPressure
+        {
+            Bike = 28,
+            Car = 32,
+            Truck = 30
+        }
+
         // Constructors:
         public Wheel(string i_Manufacturer, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
