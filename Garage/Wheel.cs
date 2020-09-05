@@ -16,17 +16,59 @@ namespace Garage
             m_MaxAirPressure = i_MaxAirPressure;
         }
 
+        // Properties:
+        public string Manufacturer
+        {
+            get
+            {
+                return m_Manufacturer;
+            }
+        }
+
+        public float CurrentAirPressure
+        {
+            get
+            {
+                return m_CurrentAirPressure;
+            }
+            set
+            {
+                m_CurrentAirPressure = value;
+            }
+        }
+
+        public float MaxAirPressure
+        {
+            get
+            {
+                return m_MaxAirPressure;
+            }
+        }
+
+
+
         // Methods:
         public void InflateWheel(float i_AirPressure)
         {
-            if (m_CurrentAirPressure + i_AirPressure < m_MaxAirPressure)
+            if (CurrentAirPressure + i_AirPressure < MaxAirPressure)
             {
-                m_CurrentAirPressure += i_AirPressure;
+                CurrentAirPressure += i_AirPressure;
             }
             else
             {
                 // throw new ValutOutOfRangeException();
             }
+        }
+
+        // Object Overrides:
+        public override string ToString()
+        {
+            return string.Format(
+@"
+Manufacturer: {0}.
+AirPressure: {1}.",
+Manufacturer,
+CurrentAirPressure);
         }
     }
 }

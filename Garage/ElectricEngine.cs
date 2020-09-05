@@ -15,21 +15,39 @@ namespace Garage
         }
 
         // Methods:
-        protected override void FillUpEnergy(float i_EnergyAmountToFill, string i_GasType)
+        protected override void FillUpEnergy(float i_EnergyAmountToFill, string i_GasType = null)
         {
+            hasNoGas(i_GasType);
             chargeEngine(i_EnergyAmountToFill);
+        }
+
+        private void hasNoGas(string i_GasType)
+        {
+            if (i_GasType != null)
+            {
+                throw new ArgumentException("Electric engine does not use gas. Gas type was ", i_GasType);
+            }
         }
 
         private void chargeEngine(float i_AmountToCharge)
         {
-            if (m_CurrentAmountOfEnergy + i_AmountToCharge < m_MaxCapacityEnergy)
+            if (CurrentCapacityEnergy + i_AmountToCharge < MaxCapacityEnergy)
             {
-                m_CurrentAmountOfEnergy += i_AmountToCharge;
+                CurrentCapacityEnergy += i_AmountToCharge;
             }
             else
             {
-                // throw new ValutOutOfRangeException.
+                // throw new ValueOutOfRangeException.
             }
+        }
+
+        // Object Overrides:
+        public override string ToString()
+        {
+            return string.Format(
+@"
+Battery Remain Hours: {0}.",
+CurrentCapacityEnergy);
         }
     }
 }
