@@ -6,6 +6,7 @@ namespace Ex03.GarageLogic
     {
         // Data Memmbers:
         private readonly float r_MaxValue;
+        private readonly float r_MinValue;
 
         // Properties:
         public float MaxValue
@@ -15,12 +16,21 @@ namespace Ex03.GarageLogic
                 return r_MaxValue;
             }
         }
-        
+
+        public float MinValue
+        {
+            get
+            {
+                return r_MinValue;
+            }
+        }
+
         // Constructor:
-        public ValueOutOfRangeException(float i_MaxValue) :
-            base(string.Format("An error occured while trying insert value {0}. The value is out of range", i_MaxValue))
+        public ValueOutOfRangeException(float i_MinValue, float i_MaxValue) :
+            base(string.Format("An error occured while trying insert value. Minimum is {0}, and maximum is {1}", i_MinValue , i_MaxValue))
         {
             r_MaxValue = i_MaxValue;
+            r_MinValue = i_MinValue;
         }
     }
 }

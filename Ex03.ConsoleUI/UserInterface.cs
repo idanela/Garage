@@ -77,31 +77,50 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(menuOptions);
         }
 
-        public static Vehicle CreateUserVehicle()
+        private void insertNewCar()
+        {
+            string ownerName, ownerPhoneNumber;
+            string licenseNumber;
+
+            Console.WriteLine("For add a new car please type first the license number:");
+            licenseNumber = Utilities.GetUserInput();
+            if (r_Garage.IsGarageEmpty())
+            {
+                Console.WriteLine("To Insert a new car, please fill all the details below:");
+                Vehicle vehicle = CreateUserVehicle(licenseNumber);
+                getOwnerDetails(out ownerName, out ownerPhoneNumber);
+                r_Garage.AddToGarage(vehicle, ownerName, ownerPhoneNumber);
+            }
+            else
+            {
+                if (r_Garage.isInGarage(licenseNumber))
+                {
+                    Console.Write("Vehicle with license number {0} is already in the garage.", licenseNumber);
+                    r_Garage.changeVehicleStatus(licenseNumber, GarageCard.eStatus.InRepair);
+                }
+            }
+        }
+
+        public static Vehicle CreateUserVehicle(string i_LicenseNumber)
         {
             string model;
-            string licenseNumber;
             Engine.eEngineType engineType;
             ManufectureVehicle.eVehicleType vehicleType;
 
-            
-            Console.WriteLine("Please enter the engine type:");
-            licenseNumber = Console.ReadLine();
-            Console.WriteLine("Please enter the model:");
-            model = Console.ReadLine();
-            Console.WriteLine("Please enter the license number:");
-            Engine.eEngineType.TryParse(Console.ReadLine(), out engineType);
             Console.WriteLine("Please enter the type of your vehicle:");
-            ManufectureVehicle.eVehicleType.TryParse(Console.ReadLine(), out vehicleType);
+            ManufectureVehicle.eVehicleType.TryParse(Utilities.GetUserInput(), out vehicleType);
+            Console.WriteLine("Please enter the model:");
+            model = Utilities.GetUserInput();
+            Console.WriteLine("Please enter the engine type:");
+            Engine.eEngineType.TryParse(Utilities.GetUserInput(), out engineType);
             Utilities.CheckValidEngineAndVehicleTypes(ref engineType, ref vehicleType);
-            
 
-            Vehicle vehicle = ManufectureVehicle.CreateVehicle(licenseNumber, model, engineType, vehicleType);
+
+            Vehicle vehicle = ManufectureVehicle.CreateVehicle(i_LicenseNumber, model, engineType, vehicleType);
             UpdateProperties(vehicle);
 
             return vehicle;
         }
-
 
         public static void UpdateProperties(Vehicle i_Vehicle)
         {
@@ -120,22 +139,18 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private void insertNewCar()
+        private static void getOwnerDetails(out string o_OwnerName, out string o_OwnerPhoneNumber)
         {
-            Console.WriteLine("To Insert a new car, please fill all the details below:");
-            Vehicle vehicle = CreateUserVehicle();
-
-            r_Garage.InsertNewVehicle(vehicle.VehicleIdNumber, vehicle);
-            // if i_LicenseNumber is in Garage[Car with the same license number]
-            // Send msg to the user, that the car is already in the garage.
-            // Put the current vehicle to "fix" status.
-            // else Put the current vehicle to "fix" status. 
+            Console.WriteLine("Please enter your name:");
+            o_OwnerName = Utilities.GetUserInput();
+            Console.WriteLine("Please enter your name:");
+            o_OwnerPhoneNumber = Utilities.GetUserInput();
         }
 
         private static void showLicenseNumberList()
         {
             Console.WriteLine("To show license number of all vehicles, please enter a vehicle's status to filter:");
-            string statusFilter = getUserInput();
+            string statusFilter = Utilities.GetUserInput();
 
             // if i_StatusFilter == "fixed"
             // Garage.ShowFixedVehiclesLicenseNumber()
@@ -150,16 +165,16 @@ namespace Ex03.ConsoleUI
         private static void changeStatus()
         {
             Console.WriteLine("To change a vehicle's status, please enter a license number:");
-            string licenseNumber = getUserInput();
+            string licenseNumber = Utilities.GetUserInput();
             Console.WriteLine("Please enter a vehicle's new status (unfixed/fix/paid):");
-            string newStatus = getUserInput();
+            string newStatus = Utilities.GetUserInput();
             // Garage[Car with the same i_LicenseNumber].ChangeStatus(i_NewStatus);
         }
 
         private static void inflateWheel()
         {
             Console.WriteLine("To inflate the wheels, please enter a license number:");
-            string licenseNumber = getUserInput();
+            string licenseNumber = Utilities.GetUserInput();
             // Inflate wheel in the car with i_LicenseNumber.
         }
 
@@ -169,11 +184,11 @@ namespace Ex03.ConsoleUI
             GasEngine.eGasType gasType;
 
             Console.WriteLine("To fill with gas, please enter a license number:");
-            string licenseNumber = getUserInput();
+            string licenseNumber = Utilities.GetUserInput();
             Console.WriteLine("Please enter a amount of gas to fill:");
-            float.TryParse(getUserInput(), out amountOfGasToFill);
+            float.TryParse(Utilities.GetUserInput(), out amountOfGasToFill);
             Console.WriteLine("Please enter the type of gas:");
-            GasEngine.eGasType.TryParse(getUserInput(), out gasType);
+            GasEngine.eGasType.TryParse(Utilities.GetUserInput(), out gasType);
             // Garage[Car[i_LicenseNumber]].FillUpEnergy(i_AmoubtOfGasToFill, i_GasType)
         }
 
@@ -183,9 +198,9 @@ namespace Ex03.ConsoleUI
             GasEngine.eGasType gasType;
 
             Console.WriteLine("To fill with gas, please enter a license number:");
-            string licenseNumber = getUserInput();
+            string licenseNumber = Utilities.GetUserInput();
             Console.WriteLine("Please enter a amount of charging (in hours):");
-            float.TryParse(getUserInput(), out amountOfCharge);
+            float.TryParse(Utilities.GetUserInput(), out amountOfCharge);
             // Garage[Car[i_LicenseNumber]].FillUpEnergy(i_AmoubtOfGasToFill, null)
         }
 
@@ -197,12 +212,7 @@ namespace Ex03.ConsoleUI
         private static void enterLicnseNumber(string msg)
         {
             Console.WriteLine(msg);
-            string licenseNumber = getUserInput();
-        }
-
-        private static string getUserInput()
-        {
-            return Console.ReadLine();
+            string licenseNumber = Utilities.GetUserInput();
         }
     }
 }
