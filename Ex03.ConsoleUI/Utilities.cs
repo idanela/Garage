@@ -148,5 +148,10 @@ namespace Ex03.ConsoleUI
 
             return isValidNumOfDoors;
         }
+
+        public static string GetUserInput()
+        {
+            return Console.ReadLine();
+        }
     }
 }

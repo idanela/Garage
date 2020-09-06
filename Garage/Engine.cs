@@ -42,7 +42,7 @@
         }
 
         // Methods:
-        protected virtual void FillUpEnergy(float i_EnergyAmountToFill, string i_GasType)
+        public virtual void FillUpEnergy(float i_EnergyAmountToFill, GasEngine.eGasType i_GasType)
         {
             if (CurrentCapacityEnergy + i_EnergyAmountToFill < MaxCapacityEnergy)
             {
@@ -50,7 +50,7 @@
             }
             else
             {
-                throw new ValueOutOfRangeException(i_EnergyAmountToFill);
+                throw new ValueOutOfRangeException(0, i_EnergyAmountToFill);
             }
         }
     }
