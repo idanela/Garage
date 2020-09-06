@@ -46,7 +46,7 @@ namespace Ex03.GarageLogic
                     filteredCards.Add(pair.Value);
                 }
             }
-
+            
             return filteredCards;
         }
 
@@ -75,9 +75,11 @@ namespace Ex03.GarageLogic
             GarageCard card ;
             if(m_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
+                Wheel wheel;
+
                 for (int i = 0; i<card.VehicleToFix.Wheels.Count; i++)
                 {
-                    Wheel wheel = card.VehicleToFix.Wheels[i];
+                    wheel =card.VehicleToFix.Wheels[i];
                     wheel.CurrentAirPressure = card.VehicleToFix.Wheels[i].MaxAirPressure;
                     card.VehicleToFix.Wheels[i] = wheel;
                 }              
@@ -93,8 +95,7 @@ namespace Ex03.GarageLogic
             }
         }
         
-
-        public void ChargeElectricCar(string i_LicenseNumber, float i_NumOfMinutesToCharge)
+        public void ChargeElectricVehicle(string i_LicenseNumber, float i_NumOfMinutesToCharge)
         {
             GarageCard card;
             if (m_Vehicles.TryGetValue(i_LicenseNumber, out card))
