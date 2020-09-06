@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
 
         public enum eNumOfDoors
         {
-            one = 1,
+            One = 1,
             Two,
             Three,
             Four
@@ -44,6 +44,11 @@ namespace Ex03.GarageLogic
             {
                 return m_NumOfDoors;
             }
+
+            set
+            {
+                m_NumOfDoors = value;
+            }
         }
 
         public eColorOfCar ColorOfCar
@@ -52,6 +57,10 @@ namespace Ex03.GarageLogic
             {
                 return m_ColorOfCar;
             }
+            set
+            {
+                m_ColorOfCar = value;
+            }
         }
 
         public override void updateProperties(object i_ColorOfCar, object i_NumOfDoors)
@@ -59,8 +68,6 @@ namespace Ex03.GarageLogic
             m_ColorOfCar = (eColorOfCar)i_ColorOfCar;
             m_NumOfDoors = (eNumOfDoors)i_NumOfDoors;
         }
-
-
     }
 }
 

@@ -36,6 +36,10 @@ namespace Ex03.GarageLogic
             {
                 return m_LicenceType;
             }
+            set
+            {
+                m_LicenceType = value;
+            }
         }
 
         public int EngineVolume
@@ -43,6 +47,11 @@ namespace Ex03.GarageLogic
             get
             {
                 return m_EngineVolume;
+            }
+
+            set
+            {
+                m_EngineVolume = value;
             }
         }
 

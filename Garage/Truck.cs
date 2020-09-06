@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
         //Data Members
         private bool m_HasDangerCarry;
-        private float r_CargoVolume;
+        private float m_CargoVolume;
 
         public Truck(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
             : base(i_Model, i_VehicleIdNumber, i_Engine)
@@ -39,14 +39,19 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_CargoVolume;
+                return m_CargoVolume;
+            }
+
+            set
+            {
+                m_CargoVolume = value;
             }
         }
 
         public override void updateProperties(object i_HasDangerousCarry, object i_CargoVolume)
         {
             m_HasDangerCarry = (bool)i_HasDangerousCarry;
-            r_CargoVolume = (float)i_CargoVolume;
+            m_CargoVolume = (float)i_CargoVolume;
         }
     }
 }
