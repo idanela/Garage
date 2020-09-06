@@ -1,16 +1,15 @@
-﻿
-using System;
+﻿using System;
 
 namespace Ex03.GarageLogic
 {
     public sealed class ElectricEngine : Engine
     {
         // Constants:
-        public const float k_BikeBatteryTime = 1.6f;    // Can be internal?
-        public const float k_CarBatteryTime = 4.8f;     // Can be internal?
+        public const float k_BikeBatteryTime = 1.6f;
+        public const float k_CarBatteryTime = 4.8f;
 
         // Constructors:
-        public ElectricEngine(float i_CurrentAmountToCharge, float i_MaxCapacity) : base(i_CurrentAmountToCharge, i_MaxCapacity)
+        public ElectricEngine(float i_MaxCapacity) : base(i_MaxCapacity)
         {
         }
 
