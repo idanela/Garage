@@ -20,8 +20,8 @@ namespace Ex03.GarageLogic
         private ushort m_NumOfDoors;
         private eColorOfCar m_ColorOfCar;
 
-        public Car(ushort i_NumOfDoors, eColorOfCar i_ColorOfCar, string i_Model, string i_OwnersName, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
-            : base(i_Model, i_OwnersName, i_VehicleIdNumber, i_PrecentageOfEnergyLeft, i_Wheels, i_Engine)
+        public Car(ushort i_NumOfDoors, eColorOfCar i_ColorOfCar, string i_Model, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
+            : base(i_Model, i_VehicleIdNumber, i_PrecentageOfEnergyLeft, i_Wheels, i_Engine)
         {
             m_NumOfDoors = i_NumOfDoors;
             m_ColorOfCar = i_ColorOfCar;

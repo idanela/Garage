@@ -4,18 +4,16 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        protected readonly string m_Model;
-        protected readonly string m_OwnersName;
-        protected readonly string m_VehicleIdNumber;
+        protected readonly string r_Model;
+        protected readonly string r_VehicleIdNumber;
         protected float m_PrecentageOfEnergyLeft;
         protected List<Wheel> m_Wheels;
         Engine m_Engine;
 
-        protected Vehicle(string i_Model, string i_OwnersName, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
+        protected Vehicle(string i_Model, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
         {
-            m_Model = i_Model;
-            m_OwnersName = i_OwnersName;
-            m_VehicleIdNumber = i_VehicleIdNumber;
+            r_Model = i_Model;
+            r_VehicleIdNumber = i_VehicleIdNumber;
             m_PrecentageOfEnergyLeft = i_PrecentageOfEnergyLeft;
             m_Wheels = i_Wheels;
             m_Engine = i_Engine;
@@ -26,15 +24,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_Model;
-            }
-        }
-
-        public string OwnersName
-        {
-            get
-            {
-                return m_OwnersName;
+                return r_Model;
             }
         }
 
@@ -42,7 +32,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_VehicleIdNumber;
+                return r_VehicleIdNumber;
             }
         }
 
