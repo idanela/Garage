@@ -17,14 +17,14 @@ namespace Ex03.GarageLogic
         }
 
         // Constructors:
-        protected Engine(float iCurrentCapacityEnergy, float i_MaxCapacityEnergy)
+        protected Engine(float i_MaxCapacityEnergy)
         {
-            m_CurrentAmountOfEnergy = iCurrentCapacityEnergy;
+            m_CurrentAmountOfEnergy = 0;
             r_MaxCapacityEnergy = i_MaxCapacityEnergy;
         }
 
         // Properties:
-        protected float CurrentCapacityEnergy
+        public float CurrentCapacityEnergy
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        protected float MaxCapacityEnergy
+        public float MaxCapacityEnergy
         {
             get
             {
