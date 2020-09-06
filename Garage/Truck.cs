@@ -53,5 +53,13 @@
             }
         }
 
+        public override string ToString()
+        {     
+            return base.ToString() + string.Format(@"
+Does it carry Dangerous cargo?: {0}
+CArgo volume is: {1}
+",
+           m_HasDangerCarry, m_CargoVolume); 
+        }
     }
 }

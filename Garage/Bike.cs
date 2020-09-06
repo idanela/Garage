@@ -59,5 +59,14 @@
                 m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Bike));
             }
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + string.Format(@"
+EngineVolume: {0}
+Lisence kind: {1}
+",
+m_EngineVolume,m_LicenceType);
+        }
     }
 }
