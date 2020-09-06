@@ -9,14 +9,14 @@ namespace Ex03.GarageLogic
     public class Truck : Vehicle
     {
         //Data Members
-        bool m_HasDangerCarry;
-        float m_CargoVolume;
+        private bool m_HasDangerCarry;
+        private readonly float r_CargoVolume;
 
-        public Truck(bool i_HasDangerCarry,float i_CargoVolume, string i_Model, string i_OwnersName, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
-            : base(i_Model, i_OwnersName, i_VehicleIdNumber, i_PrecentageOfEnergyLeft, i_Wheels, i_Engine)
+        public Truck(bool i_HasDangerCarry,float i_CargoVolume, string i_Model, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
+            : base(i_Model, i_VehicleIdNumber, i_PrecentageOfEnergyLeft, i_Wheels, i_Engine)
         {
-            m_HasDangerCarry = i_HasDangerCarry;
-            m_CargoVolume = i_CargoVolume;
+            m_HasDangerCarry = i_HasDangerCarry; // = false?
+            r_CargoVolume = i_CargoVolume;
         }
 
         //Properties
@@ -26,13 +26,18 @@ namespace Ex03.GarageLogic
             {
                 return m_HasDangerCarry;
             }
+
+            set
+            {
+                m_HasDangerCarry = value;
+            }
         }
 
         public float CargoVolume
         {
             get
             {
-                return m_CargoVolume;
+                return r_CargoVolume;
             }
         }
 
