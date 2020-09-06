@@ -48,6 +48,11 @@ namespace Ex03.GarageLogic
             }
         }
 
+        private Vehicle findVehicle(string i_LicenseNumber)
+        {
+            return Vehicles[i_LicenseNumber];
+        }
+
         public void ChangeVehicleStatus(string i_LicenseNumber)
         {
 
