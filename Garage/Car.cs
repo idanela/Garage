@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Ex03.GarageLogic
 {
     public sealed class Car : Vehicle
@@ -18,7 +13,7 @@ namespace Ex03.GarageLogic
 
         public enum eNumOfDoors
         {
-            one = 1,
+            One = 1,
             Two,
             Three,
             Four
@@ -44,6 +39,11 @@ namespace Ex03.GarageLogic
             {
                 return m_NumOfDoors;
             }
+
+            set
+            {
+                m_NumOfDoors = value;
+            }
         }
 
         public eColorOfCar ColorOfCar
@@ -51,6 +51,10 @@ namespace Ex03.GarageLogic
             get
             {
                 return m_ColorOfCar;
+            }
+            set
+            {
+                m_ColorOfCar = value;
             }
         }
 
