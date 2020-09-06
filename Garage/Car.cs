@@ -68,6 +68,15 @@ namespace Ex03.GarageLogic
                 m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Car));
             }
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + string.Format(@"
+Number of doors: {0}
+color of car: {1}
+",
+           m_NumOfDoors, m_ColorOfCar);
+        }
     }
 }
 

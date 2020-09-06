@@ -6,15 +6,15 @@ namespace Ex03.GarageLogic
     public abstract class Vehicle
     {
         protected readonly string r_Model;
-        protected readonly string r_VehicleIdNumber;
+        protected readonly string r_LisenceNumber;
         protected float m_PrecentageOfEnergyLeft;
         protected List<Wheel> m_Wheels;
-        Engine m_Engine;
+        protected Engine m_Engine;
 
         protected Vehicle(string i_Model, string i_LicenseNumber, Engine i_Engine)
         {
             r_Model = i_Model;
-            r_VehicleIdNumber = i_LicenseNumber;
+            r_LisenceNumber = i_LicenseNumber;
             m_PrecentageOfEnergyLeft = 0;
             m_Engine = i_Engine;
         }
@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_VehicleIdNumber;
+                return r_LisenceNumber;
             }
         }
 
@@ -58,10 +58,35 @@ namespace Ex03.GarageLogic
             {
                 return m_Engine;
             }
+
+            set
+            {
+                Engine = value;
+            }
         }
 
         public abstract void UpdateProperties(object i_Obj, object i_SecObj);
+
         public abstract void UpdateWheels();
+
+        public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
+        {
+            Wheel wheel;
+            for(int i = 0; i<this.Wheels.Count; i++)
+            {
+                wheel = m_Wheels[i];
+                wheel.Manufacturer = i_NameOfManufacterer;
+                m_Wheels[i] = wheel;
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format(@"
+Model:{0}
+license number:{1}
+Wheels:", r_Model,r_LisenceNumber) +m_Wheels.ToString() + m_Engine.ToString();
+        }
     }
 }
 
