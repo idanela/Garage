@@ -21,7 +21,10 @@ namespace Ex03.GarageLogic
                 return m_Vehicles;
             }
         }
-
+        public bool IsGarageEmpty()
+        {
+            return m_Vehicles.Count == 0;
+        }
         public bool isInGarage(string i_VehicleIdNumber)
         {
             return m_Vehicles.ContainsKey(i_VehicleIdNumber);
