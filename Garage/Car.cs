@@ -59,8 +59,6 @@ namespace Ex03.GarageLogic
             m_ColorOfCar = (eColorOfCar)i_ColorOfCar;
             m_NumOfDoors = (eNumOfDoors)i_NumOfDoors;
         }
-
-
     }
 }
 
