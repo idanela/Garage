@@ -22,6 +22,7 @@ namespace Ex03.GarageLogic
             r_PhoneNumber = i_PhoneNumber;
             m_CarToFix = i_CarToFix;
             m_StatusInGarage = eStatus.InRepair; 
+
         }
 
         //Properties
