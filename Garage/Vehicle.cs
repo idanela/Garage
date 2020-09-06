@@ -44,7 +44,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        virtual public List<Wheel> Wheels
+         public List<Wheel> Wheels
         {
             get
             {
@@ -52,7 +52,16 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public abstract void updateProperties(object i_Obj, object i_SecObj);
+        public Engine Engine
+        {
+            get
+            {
+                return m_Engine;
+            }
+        }
+
+        public abstract void UpdateProperties(object i_Obj, object i_SecObj);
+        public abstract void UpdateWheels();
     }
 }
 
