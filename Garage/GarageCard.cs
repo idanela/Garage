@@ -1,7 +1,7 @@
 ﻿
 namespace Ex03.GarageLogic
 {
-    public class GarageCard
+    public sealed class GarageCard
     {
         public enum eStatus
         {

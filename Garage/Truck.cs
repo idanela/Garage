@@ -1,13 +1,13 @@
 ﻿namespace Ex03.GarageLogic
 {
-    public class Truck : Vehicle
+    public sealed class Truck : Vehicle
     {
         //Data Members
         private bool m_HasDangerCarry;
         private float m_CargoVolume;
 
-        public Truck(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
-            : base(i_Model, i_VehicleIdNumber, i_Engine)
+        public Truck(string i_Model, string i_LicenseNumber, Engine i_Engine)
+            : base(i_Model, i_LicenseNumber, i_Engine)
         {
             UpdateWheels();
         }

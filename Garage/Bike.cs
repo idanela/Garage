@@ -1,6 +1,6 @@
 ﻿namespace Ex03.GarageLogic
 {
-    public class Bike : Vehicle
+    public sealed class Bike : Vehicle
     {
         public enum eLicenceType
         {
@@ -14,8 +14,8 @@
         private eLicenceType m_LicenceType;
         private int m_EngineVolume;
 
-        public Bike(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
-           : base(i_Model, i_VehicleIdNumber, i_Engine)
+        public Bike(string i_Model, string i_LicenseNumber, Engine i_Engine)
+           : base(i_Model, i_LicenseNumber, i_Engine)
         {
             UpdateWheels();
         }
