@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class Truck : Vehicle
     {
         //Data Members
         private bool m_HasDangerCarry;
-        private readonly float r_CargoVolume;
+        private float m_CargoVolume;
 
-        public Truck(bool i_HasDangerCarry,float i_CargoVolume, string i_Model, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
-            : base(i_Model, i_VehicleIdNumber, i_PrecentageOfEnergyLeft, i_Wheels, i_Engine)
+        public Truck(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
+            : base(i_Model, i_VehicleIdNumber, i_Engine)
         {
-            m_HasDangerCarry = i_HasDangerCarry; // = false?
-            r_CargoVolume = i_CargoVolume;
+            for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Truck; i++)
+            {
+                m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Truck));
+            }
         }
 
         //Properties
@@ -37,9 +33,19 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_CargoVolume;
+                return m_CargoVolume;
+            }
+
+            set
+            {
+                m_CargoVolume = value;
             }
         }
 
+        public override void updateProperties(object i_HasDangerousCarry, object i_CargoVolume)
+        {
+            m_HasDangerCarry = (bool)i_HasDangerousCarry;
+            m_CargoVolume = (float)i_CargoVolume;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -10,12 +11,11 @@ namespace Ex03.GarageLogic
         protected List<Wheel> m_Wheels;
         Engine m_Engine;
 
-        protected Vehicle(string i_Model, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
+        protected Vehicle(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
         {
             r_Model = i_Model;
             r_VehicleIdNumber = i_VehicleIdNumber;
-            m_PrecentageOfEnergyLeft = i_PrecentageOfEnergyLeft;
-            m_Wheels = i_Wheels;
+            m_PrecentageOfEnergyLeft = 0;
             m_Engine = i_Engine;
         }
 
@@ -52,6 +52,7 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public abstract void updateProperties(object i_Obj, object i_SecObj);
     }
 }
 

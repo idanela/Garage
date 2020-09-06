@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Ex03.GarageLogic
 {
     public sealed class Car : Vehicle
@@ -16,25 +11,38 @@ namespace Ex03.GarageLogic
             Red
         }
 
+        public enum eNumOfDoors
+        {
+            One = 1,
+            Two,
+            Three,
+            Four
+        }
+
         //Data members
-        private ushort m_NumOfDoors;
+        private eNumOfDoors m_NumOfDoors;
         private eColorOfCar m_ColorOfCar;
 
-        public Car(ushort i_NumOfDoors, eColorOfCar i_ColorOfCar, string i_Model, string i_LicenseNumber,, Engine i_Engine)
-            : base(i_Model, i_LicenseNumber, i_Wheels, i_EngineType)
+        public Car(string i_Model, string i_LicenseNumber, Engine i_Engine)
+            : base(i_Model, i_LicenseNumber, i_Engine)
         {
-            Engine = makeEngine(Type Electric)
-            m_Wheels = new List<Wheel>(4); 
-            m_NumOfDoors = i_NumOfDoors;
-            m_ColorOfCar = i_ColorOfCar;
+            for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Car; i++)
+            {
+                m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Car));
+            }
         }
 
         //Properties
-        public ushort NumOfDoors
+        public eNumOfDoors NumOfDoors
         {
             get
             {
                 return m_NumOfDoors;
+            }
+
+            set
+            {
+                m_NumOfDoors = value;
             }
         }
 
@@ -44,8 +52,18 @@ namespace Ex03.GarageLogic
             {
                 return m_ColorOfCar;
             }
+            set
+            {
+                m_ColorOfCar = value;
+            }
+        }
+
+        public override void updateProperties(object i_ColorOfCar, object i_NumOfDoors)
+        {
+            m_ColorOfCar = (eColorOfCar)i_ColorOfCar;
+            m_NumOfDoors = (eNumOfDoors)i_NumOfDoors;
         }
     }
 }
-        
+
 

@@ -1,30 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class Bike : Vehicle
     {
+        public enum eLicenceType
+        {
+            A,
+            A1,
+            B,
+            B1
+        }
+
         // Data members
-        private string m_LicenceType;
+        private eLicenceType m_LicenceType;
         private int m_EngineVolume;
 
-        public Bike(string i_LicenceType, ushort i_EngineVolume, string i_Model, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
-           : base(i_Model, i_VehicleIdNumber, i_PrecentageOfEnergyLeft, i_Wheels, i_Engine)
+        public Bike(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
+           : base(i_Model, i_VehicleIdNumber, i_Engine)
         {
-            m_LicenceType = i_LicenceType;
-            m_EngineVolume = i_EngineVolume;
+            for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Bike; i++)
+            {
+                m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Bike));
+            }
         }
 
         //Properties
-        public string LicenceType
+        public eLicenceType LicenceType
         {
             get
             {
                 return m_LicenceType;
+            }
+            set
+            {
+                m_LicenceType = value;
             }
         }
 
@@ -34,8 +42,17 @@ namespace Ex03.GarageLogic
             {
                 return m_EngineVolume;
             }
+
+            set
+            {
+                m_EngineVolume = value;
+            }
         }
 
-
+        public override void updateProperties(object i_engineVolume, object i_LicenseType)
+        {
+            m_EngineVolume = (int)i_engineVolume;
+            m_LicenceType = (eLicenceType)i_LicenseType;
+        }
     }
 }
