@@ -9,10 +9,7 @@
         public Truck(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
             : base(i_Model, i_VehicleIdNumber, i_Engine)
         {
-            for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Truck; i++)
-            {
-                m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Truck));
-            }
+            UpdateWheels();
         }
 
         //Properties
@@ -42,10 +39,19 @@
             }
         }
 
-        public override void updateProperties(object i_HasDangerousCarry, object i_CargoVolume)
+        public override void UpdateProperties(object i_HasDangerousCarry, object i_CargoVolume)
         {
             m_HasDangerCarry = (bool)i_HasDangerousCarry;
             m_CargoVolume = (float)i_CargoVolume;
         }
+
+        public override void UpdateWheels()
+        {
+            for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Truck; i++)
+            {
+                m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Truck));
+            }
+        }
+
     }
 }

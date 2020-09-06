@@ -17,10 +17,7 @@
         public Bike(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
            : base(i_Model, i_VehicleIdNumber, i_Engine)
         {
-            for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Bike; i++)
-            {
-                m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Bike));
-            }
+            UpdateWheels();
         }
 
         //Properties
@@ -49,10 +46,18 @@
             }
         }
 
-        public override void updateProperties(object i_engineVolume, object i_LicenseType)
+        public override void UpdateProperties(object i_engineVolume, object i_LicenseType)
         {
             m_EngineVolume = (int)i_engineVolume;
             m_LicenceType = (eLicenceType)i_LicenseType;
+        }
+
+        public override void UpdateWheels()
+        {
+            for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Bike; i++)
+            {
+                m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Bike));
+            }
         }
     }
 }

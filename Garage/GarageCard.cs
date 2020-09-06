@@ -11,16 +11,16 @@ namespace Ex03.GarageLogic
         }
 
         //Data members
-        private Car m_CarToFix;
+        private Vehicle m_VehicleToFix;
         private readonly string r_OwnersName;
         private readonly string r_PhoneNumber;
         private eStatus m_StatusInGarage;
 
-        GarageCard(string i_OwnersName, string i_PhoneNumber, Car i_CarToFix)
+        public GarageCard(string i_OwnersName, string i_PhoneNumber, Vehicle i_CarToFix)
         {
             r_OwnersName = i_OwnersName;
             r_PhoneNumber = i_PhoneNumber;
-            m_CarToFix = i_CarToFix;
+            m_VehicleToFix = i_CarToFix;
             m_StatusInGarage = eStatus.InRepair; 
 
         }
@@ -41,11 +41,11 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public Car CarToFix
+        public Vehicle VehicleToFix
         {
             get
             {
-                return m_CarToFix;
+                return m_VehicleToFix;
             }
         }
 
