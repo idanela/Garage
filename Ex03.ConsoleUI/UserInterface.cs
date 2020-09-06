@@ -125,7 +125,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("To Insert a new car, please fill all the details below:");
             Vehicle vehicle = CreateUserVehicle();
 
-            r_Garage.InsertNewVehicle(vehicle.VehicleIdNumber, vehicle);
+            r_Garage.InsertNewVehicle(vehicle.i_LicenseNumber, vehicle);
             // if i_LicenseNumber is in Garage[Car with the same license number]
             // Send msg to the user, that the car is already in the garage.
             // Put the current vehicle to "fix" status.

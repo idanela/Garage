@@ -11,10 +11,10 @@ namespace Ex03.GarageLogic
         protected List<Wheel> m_Wheels;
         Engine m_Engine;
 
-        protected Vehicle(string i_Model, string i_VehicleIdNumber, Engine i_Engine)
+        protected Vehicle(string i_Model, string i_LicenseNumber, Engine i_Engine)
         {
             r_Model = i_Model;
-            r_VehicleIdNumber = i_VehicleIdNumber;
+            r_VehicleIdNumber = i_LicenseNumber;
             m_PrecentageOfEnergyLeft = 0;
             m_Engine = i_Engine;
         }
@@ -28,7 +28,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public string VehicleIdNumber
+        public string i_LicenseNumber
         {
             get
             {

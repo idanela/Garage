@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    public class Garage
+    public sealed class Garage
     {
         // Data Members:
         private Dictionary<string, GarageCard> m_Vehicles;
@@ -25,29 +25,44 @@ namespace Ex03.GarageLogic
         {
             return m_Vehicles.Count == 0;
         }
-        public bool isInGarage(string i_VehicleIdNumber)
+
+        public bool IsInGarage(string i_LicenseNumber)
         {
-            return m_Vehicles.ContainsKey(i_VehicleIdNumber);
+            return m_Vehicles.ContainsKey(i_LicenseNumber);
         }
 
         public void AddToGarage(Vehicle i_Vehicle, string i_OwnersName,string i_PhoneNumber)
         {
-            m_Vehicles.Add(i_Vehicle.VehicleIdNumber, new GarageCard(i_OwnersName, i_PhoneNumber, i_Vehicle));          
+            m_Vehicles.Add(i_Vehicle.i_LicenseNumber, new GarageCard(i_OwnersName, i_PhoneNumber, i_Vehicle));          
         }
 
-        public void changeVehicleStatus(string i_VehicleIdNumber, GarageCard.eStatus i_NewStatus)
+        public List <GarageCard> GetListOfSameStatus(GarageCard.eStatus i_Staus)
+        {
+            List<GarageCard> filteredCards = new List<GarageCard>();
+            foreach(KeyValuePair<string, GarageCard> pair in m_Vehicles)
+            {
+                if(pair.Value.Status == i_Staus)
+                {
+                    filteredCards.Add(pair.Value);
+                }
+            }
+
+            return filteredCards;
+        }
+
+        public void changeVehicleStatus(string i_LicenseNumber, GarageCard.eStatus i_NewStatus)
         {
             GarageCard card;
-           if( m_Vehicles.TryGetValue(i_VehicleIdNumber, out card))
+           if( m_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 card.Status = i_NewStatus;
             }
         }
 
-        public void InflateWheelsToMax(string i_VehicleIdNumber)
+        public void InflateWheelsToMax(string i_LicenseNumber)
         {
             GarageCard card ;
-            if(m_Vehicles.TryGetValue(i_VehicleIdNumber, out card))
+            if(m_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 for (int i = 0; i<card.VehicleToFix.Wheels.Count; i++)
                 {
@@ -58,43 +73,40 @@ namespace Ex03.GarageLogic
             }     
         }
 
-        public void FillGas(string i_VehicleIdNumber, GasEngine.eGasType i_GasType, float i_AmountToFill)
+        public void FillGas(string i_LicenseNumber, GasEngine.eGasType i_GasType, float i_AmountToFill)
         {
             GarageCard card;
-            if (m_Vehicles.TryGetValue(i_VehicleIdNumber, out card))
+            if (m_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
-               
+                card.VehicleToFix.Engine.FillUpEnergy(i_AmountToFill,i_GasType);
             }
         }
         
 
-        public void ChargeElectricCar(string i_VehicleIdNumber, float numOfMinutesToCharge)
+        public void ChargeElectricCar(string i_LicenseNumber, float i_NumOfMinutesToCharge)
         {
             GarageCard card;
-            if (m_Vehicles.TryGetValue(i_VehicleIdNumber, out card))
+            if (m_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 if (card.VehicleToFix.Engine is ElectricEngine)
                 {
-                    card.VehicleToFix.Engine.
-                }
-                    
+                    card.VehicleToFix.Engine.FillUpEnergy(i_NumOfMinutesToCharge, GasEngine.eGasType.None);
+                }      
             }
         }
 
+        //Indexers:
+        public GarageCard this[string i_LicenseNumber]
+        {
+            get
+            {
+                return m_Vehicles[i_LicenseNumber];
+            }
 
-
-
-        // Indexers:
-        //public Vehicle this[string i_LicenseNumber]
-        //{
-        //    get
-        //    {
-        //        return m_Vehicles[i_LicenseNumber];
-        //    }
-        //    set
-        //    {
-        //        m_Vehicles[i_LicenseNumber] = value;
-        //    }
+            set
+            {
+                m_Vehicles[i_LicenseNumber] = value;
+            }
         }
 
         // Methods:
