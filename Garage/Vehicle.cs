@@ -53,7 +53,6 @@ namespace Ex03.GarageLogic
         }
 
         public abstract void updateProperties(object i_Obj, object i_SecObj);
-
     }
 }
 
