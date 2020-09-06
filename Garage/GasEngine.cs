@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
         // Constants:
         public const float k_BikeTank = 5.5f;
         public const float k_CarTank = 50;
-        public const float k_TruckeTank = 105;
+        public const float k_TruckTank = 105;
 
         // Data Members:
         private readonly eGasType r_GasType;
