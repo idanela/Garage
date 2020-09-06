@@ -1,7 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
+﻿using System;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -80,22 +77,29 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(menuOptions);
         }
 
-        public static void CreateUserVehicle()
+        public static Vehicle CreateUserVehicle()
         {
-            Console.WriteLine("Please enter the engine type:");
-            string licenseNumber = Console.ReadLine();
-            Console.WriteLine("Please enter the model:");
-            string model = Console.ReadLine();
-            Console.WriteLine("Please enter the license number:");
+            string model;
+            string licenseNumber;
             Engine.eEngineType engineType;
-            Engine.eEngineType.TryParse(Console.ReadLine(), out engineType);
             ManufectureVehicle.eVehicleType vehicleType;
+
+            
+            Console.WriteLine("Please enter the engine type:");
+            licenseNumber = Console.ReadLine();
+            Console.WriteLine("Please enter the model:");
+            model = Console.ReadLine();
+            Console.WriteLine("Please enter the license number:");
+            Engine.eEngineType.TryParse(Console.ReadLine(), out engineType);
             Console.WriteLine("Please enter the type of your vehicle:");
             ManufectureVehicle.eVehicleType.TryParse(Console.ReadLine(), out vehicleType);
             Utilities.CheckValidEngineAndVehicleTypes(ref engineType, ref vehicleType);
+            
 
             Vehicle vehicle = ManufectureVehicle.CreateVehicle(licenseNumber, model, engineType, vehicleType);
             UpdateProperties(vehicle);
+
+            return vehicle;
         }
 
 
@@ -116,10 +120,12 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void insertNewCar()
+        private void insertNewCar()
         {
-            Console.WriteLine("To Insert a new car, please enter a license number:");
-            string licenseNumber = getUserInput();
+            Console.WriteLine("To Insert a new car, please fill all the details below:");
+            Vehicle vehicle = CreateUserVehicle();
+
+            r_Garage.InsertNewVehicle(vehicle.VehicleIdNumber, vehicle);
             // if i_LicenseNumber is in Garage[Car with the same license number]
             // Send msg to the user, that the car is already in the garage.
             // Put the current vehicle to "fix" status.
