@@ -12,7 +12,7 @@ namespace Ex03.GarageLogic
         private string m_LicenceType;
         private int m_EngineVolume;
 
-        public Bike(string i_LicenceType, ushort i_EngineVolume, string i_Model, string i_OwnersName, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
+        public Bike(string i_LicenceType, ushort i_EngineVolume, string i_Model, string i_VehicleIdNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels, Engine i_Engine)
            : base(i_Model, i_VehicleIdNumber, i_PrecentageOfEnergyLeft, i_Wheels, i_Engine)
         {
             m_LicenceType = i_LicenceType;
