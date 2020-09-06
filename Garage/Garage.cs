@@ -50,6 +50,17 @@ namespace Ex03.GarageLogic
             return filteredCards;
         }
 
+        public List<string> GetListOfAllLicenseNubers()
+        {
+            List<string> allLicenseNumber = new List<string>();
+            foreach (KeyValuePair<string, GarageCard> pair in m_Vehicles)
+            {
+                allLicenseNumber.Add(pair.Key);
+            }
+
+            return allLicenseNumber;
+        }
+
         public void changeVehicleStatus(string i_LicenseNumber, GarageCard.eStatus i_NewStatus)
         {
             GarageCard card;
