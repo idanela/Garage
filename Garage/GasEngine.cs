@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         public const float k_TruckeTank = 105;
 
         // Data Members:
-        private readonly string r_GasType;
+        private readonly eGasType r_GasType;
 
         // Enums:
         public enum eGasType
@@ -23,13 +23,13 @@ namespace Ex03.GarageLogic
 
 
         // Constructors:
-        public GasEngine(float i_CurrentAmountOfFuel, float i_MaxCapacity, string i_GasType) : base(i_CurrentAmountOfFuel, i_MaxCapacity)
+        public GasEngine(float i_MaxCapacity, eGasType i_GasType) : base(i_MaxCapacity)
         {
             r_GasType = i_GasType;
         }
 
         // Properties:
-        public string GasType
+        public eGasType GasType
         {
             get
             {
@@ -46,9 +46,9 @@ namespace Ex03.GarageLogic
 
         private void containSameFuelType(string i_GasType)
         {
-            if (i_GasType != GasType)
+            if (i_GasType != Enum.GetName(typeof(eGasType), r_GasType))
             {
-                throw new ArgumentException("Incorrect fuel type, engine's fuel type that was entered is ", i_GasType);
+                throw new ArgumentException("Incorrect fuel type, engine's fuel type that was entered is ", i_GasType.ToString());
             }
         }
 

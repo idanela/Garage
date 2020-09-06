@@ -80,40 +80,40 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(menuOptions);
         }
 
-        public static void AddVehicle(
-            out string o_LicenseNumber,
-            out string o_Model,
-            out Engine.eEngineType o_EngineType,
-            out ManufectureVehicle.eVehicleType o_VehicleType)
+        public static void CreateUserVehicle()
         {
             Console.WriteLine("Please enter the engine type:");
-            o_LicenseNumber = Console.ReadLine();
+            string licenseNumber = Console.ReadLine();
             Console.WriteLine("Please enter the model:");
-            o_Model = Console.ReadLine();
+            string model = Console.ReadLine();
             Console.WriteLine("Please enter the license number:");
-            Engine.eEngineType.TryParse(Console.ReadLine(), out o_EngineType);
+            Engine.eEngineType engineType;
+            Engine.eEngineType.TryParse(Console.ReadLine(), out engineType);
+            ManufectureVehicle.eVehicleType vehicleType;
             Console.WriteLine("Please enter the type of your vehicle:");
-            ManufectureVehicle.eVehicleType.TryParse(Console.ReadLine(), out o_VehicleType);
+            ManufectureVehicle.eVehicleType.TryParse(Console.ReadLine(), out vehicleType);
+            Utilities.CheckValidEngineAndVehicleTypes(ref engineType, ref vehicleType);
+
+            Vehicle vehicle = ManufectureVehicle.CreateVehicle(licenseNumber, model, engineType, vehicleType);
+            UpdateProperties(vehicle);
         }
 
-        public static void GetCarProperties(out ushort o_NumOfDoors, out Car.eColorOfCar o_CarColor)
-        {
-            Console.WriteLine("Please enter the number of doors:");
-            o_NumOfDoors = ushort.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the color of the car:");
-            Car.eColorOfCar.TryParse(Console.ReadLine(), out o_CarColor);
-        }
 
-        public static void GetBikeProperties(out string o_LicenseType, out int o_EngineVolume)
+        public static void UpdateProperties(Vehicle i_Vehicle)
         {
-            Console.WriteLine("Please enter the license type:");
-            o_LicenseType = Console.ReadLine();
-            Console.WriteLine("Please enter the engine volume:");
-            o_EngineVolume = int.Parse(Console.ReadLine());
-        }
-
-        private static List<string> getTruckProperties()
-        {
+            if (i_Vehicle is Car)
+            {
+                Utilities.GetCarProperties(i_Vehicle);
+            }
+            else if (i_Vehicle is Bike)
+            {
+                Utilities.GetBikeProperties(i_Vehicle);
+            }
+            else
+            {
+                // Is a truck.
+                Utilities.GetTruckProperties(i_Vehicle);
+            }
         }
 
         private static void insertNewCar()
