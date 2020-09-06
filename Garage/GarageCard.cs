@@ -10,6 +10,7 @@ namespace Ex03.GarageLogic
             paidFor
         }
 
+        //Data members
         private Car m_CarToFix;
         private readonly string r_OwnersName;
         private readonly string r_PhoneNumber;
