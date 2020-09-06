@@ -75,7 +75,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException(i_AirPressure);
+                throw new ValueOutOfRangeException(0, i_AirPressure);
             }
         }
 

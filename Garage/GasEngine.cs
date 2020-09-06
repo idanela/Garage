@@ -15,7 +15,8 @@ namespace Ex03.GarageLogic
         // Enums:
         public enum eGasType
         {
-            Octan98 = 0,
+            None,
+            Octan98,
             Octan96,
             Octan95,
             Soler
@@ -38,15 +39,15 @@ namespace Ex03.GarageLogic
         }
 
         // Methods:
-        protected override void FillUpEnergy(float i_EnergyAmountToFill, string i_GasType)
+        public override void FillUpEnergy(float i_EnergyAmountToFill, eGasType i_GasType)
         {
             containSameFuelType(i_GasType);
             base.FillUpEnergy(i_EnergyAmountToFill, i_GasType);
         }
 
-        private void containSameFuelType(string i_GasType)
+        private void containSameFuelType(eGasType i_GasType)
         {
-            if (i_GasType != Enum.GetName(typeof(eGasType), r_GasType))
+            if (r_GasType != i_GasType)
             {
                 throw new ArgumentException("Incorrect fuel type, engine's fuel type that was entered is ", i_GasType.ToString());
             }
