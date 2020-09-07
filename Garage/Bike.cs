@@ -42,6 +42,10 @@
 
             set
             {
+                if (value <= 0)
+                {
+                    throw new ValueOutOfRangeException(1, 1000);
+                }
                 m_EngineVolume = value;
             }
         }
