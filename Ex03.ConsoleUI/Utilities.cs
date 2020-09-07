@@ -29,6 +29,7 @@ namespace Ex03.ConsoleUI
 
         public static void UpdateProperties(Vehicle i_Vehicle)
         {
+            // i_Vehicle.UpdateProperties();
             if (i_Vehicle is Car)
             {
                 Utilities.GetCarProperties(i_Vehicle);
@@ -52,11 +53,11 @@ namespace Ex03.ConsoleUI
             o_OwnerPhoneNumber = Utilities.GetUserInput();
         }
 
-        public static string GetWheelsMenufacturer(Vehicle i_Vehicle)
+        public static void GetWheelsManufacturer(Vehicle i_Vehicle)
         {
             Console.WriteLine("Please enter the wheel's manufacturer:");
-            // Update Wheels return GetUserInput();
-            return null; // Delete me!
+            string manufacturer = GetUserInput();
+            // Update wheels in i_Vehicle
         }
 
         public static void CheckValidEngineAndVehicleTypes(
@@ -65,14 +66,14 @@ namespace Ex03.ConsoleUI
         {
             while (!isValidEngineType(io_EngineType))
             {
-                Console.WriteLine("The only availavle engine types are: {0}, {1}", 
+                Console.WriteLine("The only available engine types are: {0}, {1}", 
                     Engine.eEngineType.Electric,
                     Engine.eEngineType.Gas);
             }
 
             while (!isValidVehicleType(io_VehicleType))
             {
-                Console.WriteLine("The only availavle vehicle types are: {0}, {1}, {2}",
+                Console.WriteLine("The only available vehicle types are: {0}, {1}, {2}",
                     ManufectureVehicle.eVehicleType.Car,
                     ManufectureVehicle.eVehicleType.Bike,
                     ManufectureVehicle.eVehicleType.Truck);
@@ -116,10 +117,10 @@ namespace Ex03.ConsoleUI
         public static void GetCarProperties(Vehicle i_Car)
         {
             Console.WriteLine("Please enter the number of doors:");
-            ushort numOfDoors = ushort.Parse(Console.ReadLine());
+            ushort numOfDoors = ushort.Parse(GetUserInput());
             Console.WriteLine("Please enter the color of the car:");
             Car.eColorOfCar colorOfCar;
-            Enum.TryParse(Console.ReadLine(), out colorOfCar);
+            Enum.TryParse(GetUserInput(), out colorOfCar);
             Utilities.CheckValidCarProperties(i_Car, ref numOfDoors, ref colorOfCar);
             i_Car.UpdateProperties(numOfDoors, colorOfCar);
         }
@@ -128,9 +129,9 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Please enter the license type:");
             Bike.eLicenceType licenseType;
-            Enum.TryParse(Console.ReadLine(), out licenseType);
+            Enum.TryParse(GetUserInput(), out licenseType);
             Console.WriteLine("Please enter the engine volume:");
-            int engineVolume = int.Parse(Console.ReadLine());
+            int engineVolume = int.Parse(GetUserInput());
             Utilities.CheckValidBikeProperties(i_Bike, ref licenseType);
             i_Bike.UpdateProperties(licenseType, engineVolume);
         }
@@ -190,21 +191,21 @@ namespace Ex03.ConsoleUI
 
         public static void CheckValidBikeProperties(Vehicle i_Bike, ref Bike.eLicenceType io_LicenseType)
         {
-            while (!isValidLicenseType(ref io_LicenseType))
+            while (!isValidLicenseType(io_LicenseType))
             {
                 Console.WriteLine("The details you entered are not valid. Please try again.");
                 Enum.TryParse(GetUserInput(), out io_LicenseType);
             }
         }
 
-        private static bool isValidLicenseType(ref Bike.eLicenceType io_LicenseType)
+        private static bool isValidLicenseType(Bike.eLicenceType i_LicenseType)
         {
             bool isValidNumOfDoors = false;
             string[] licenseTypes = Enum.GetNames(typeof(Bike.eLicenceType));
 
             foreach (string licenseType in licenseTypes)
             {
-                if (Enum.GetName(typeof(Bike.eLicenceType),io_LicenseType) == licenseType))
+                if (Enum.GetName(typeof(Bike.eLicenceType),i_LicenseType) == licenseType))
                 {
                     isValidNumOfDoors = true;
                 }
@@ -215,14 +216,14 @@ namespace Ex03.ConsoleUI
 
         private static void checkValidTruckProperties(ref string io_ContainDangerousCarry)
         {
-            while (isValidContaiDangerousAnswer(io_ContainDangerousCarry))
+            while (isValidContainDangerousAnswer(io_ContainDangerousCarry))
             {
                 Console.WriteLine("You can enter only 'Y' or 'N' for answer. Please try again.");
                 io_ContainDangerousCarry = Console.ReadLine();
             }
         }
 
-        private static bool isValidContaiDangerousAnswer(string io_ContainDangerousCarry)
+        private static bool isValidContainDangerousAnswer(string io_ContainDangerousCarry)
         {
             return io_ContainDangerousCarry == "Y" || io_ContainDangerousCarry == "N";
         }

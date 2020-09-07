@@ -89,6 +89,7 @@ namespace Ex03.GarageLogic
         public void FillGas(string i_LicenseNumber, GasEngine.eGasType i_GasType, float i_AmountToFill)
         {
             GarageCard card;
+
             if (m_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 card.VehicleToFix.Engine.FillUpEnergy(i_AmountToFill,i_GasType);

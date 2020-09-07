@@ -21,7 +21,7 @@
         }
 
         // Properties:
-        public float CurrentCapacityEnergy
+        public float CurrentAmountOfEnergy
         {
             get
             {
@@ -42,9 +42,9 @@
         }
 
         // Methods:
-        public virtual void FillUpEnergy(float i_EnergyAmountToFill, GasEngine.eGasType i_GasType)
+        public virtual void FillUpEnergy(float i_EnergyAmountToFill)
         {
-            if (CurrentCapacityEnergy + i_EnergyAmountToFill < MaxCapacityEnergy)
+            if (CurrentAmountOfEnergy + i_EnergyAmountToFill < MaxCapacityEnergy)
             {
                 m_CurrentAmountOfEnergy += i_EnergyAmountToFill;
             }
