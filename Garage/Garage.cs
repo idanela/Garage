@@ -5,12 +5,12 @@ namespace Ex03.GarageLogic
     public sealed class Garage
     {
         // Data Members:
-        private Dictionary<string, GarageCard> m_Vehicles;
+        private readonly Dictionary<string, GarageCard> R_Vehicles;
 
         // Constructors:
         public Garage()
         {
-            m_Vehicles = new Dictionary<string, GarageCard>();
+            R_Vehicles = new Dictionary<string, GarageCard>();
         }
 
         // Properties:
@@ -18,42 +18,52 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_Vehicles;
+                return R_Vehicles;
             }
         }
         public bool IsGarageEmpty()
         {
-            return m_Vehicles.Count == 0;
+            return R_Vehicles.Count == 0;
         }
 
         public bool IsInGarage(string i_LicenseNumber)
         {
-            return m_Vehicles.ContainsKey(i_LicenseNumber);
+            return R_Vehicles.ContainsKey(i_LicenseNumber);
         }
 
         public void AddToGarage(Vehicle i_Vehicle, string i_OwnersName,string i_PhoneNumber)
         {
-            m_Vehicles.Add(i_Vehicle.i_LicenseNumber, new GarageCard(i_OwnersName, i_PhoneNumber, i_Vehicle));          
+            R_Vehicles.Add(i_Vehicle.i_LicenseNumber, new GarageCard(i_OwnersName, i_PhoneNumber, i_Vehicle));          
         }
 
-        public List <string> GetListOfSameStatus(GarageCard.eStatus i_Staus)
+        public List <string> GetListOfSameStatus(GarageCard.eStatus? i_Staus)
         {
             List<string> filteredLicsenceNubers = new List<string>();
-            foreach(KeyValuePair<string, GarageCard> pair in m_Vehicles)
+            if (i_Staus != null)
             {
-                if(pair.Value.Status == i_Staus)
+                foreach (KeyValuePair<string, GarageCard> pair in R_Vehicles)
+                {
+                    if (pair.Value.Status == i_Staus)
+                    {
+                        filteredLicsenceNubers.Add(pair.Key);
+                    }
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<string, GarageCard> pair in R_Vehicles)
                 {
                     filteredLicsenceNubers.Add(pair.Key);
                 }
             }
-            
+
             return filteredLicsenceNubers;
         }
 
         public List<string> GetListOfAllLicenseNubers()
         {
             List<string> allLicenseNumber = new List<string>();
-            foreach (KeyValuePair<string, GarageCard> pair in m_Vehicles)
+            foreach (KeyValuePair<string, GarageCard> pair in R_Vehicles)
             {
                 allLicenseNumber.Add(pair.Key);
             }
@@ -64,7 +74,7 @@ namespace Ex03.GarageLogic
         public void changeVehicleStatus(string i_LicenseNumber, GarageCard.eStatus i_NewStatus)
         {
             GarageCard card;
-           if( m_Vehicles.TryGetValue(i_LicenseNumber, out card))
+           if( R_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 card.Status = i_NewStatus;
             }
@@ -73,7 +83,7 @@ namespace Ex03.GarageLogic
         public void InflateWheelsToMax(string i_LicenseNumber)
         {
             GarageCard card ;
-            if(m_Vehicles.TryGetValue(i_LicenseNumber, out card))
+            if(R_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 Wheel wheel;
 
@@ -90,20 +100,20 @@ namespace Ex03.GarageLogic
         {
             GarageCard card;
 
-            if (m_Vehicles.TryGetValue(i_LicenseNumber, out card))
+            if (R_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
-                card.VehicleToFix.Engine.FillUpEnergy(i_AmountToFill,i_GasType);
+                card.VehicleToFix.Engine.FillUpEnergy(i_AmountToFill);
             }
         }
         
         public void ChargeElectricVehicle(string i_LicenseNumber, float i_NumOfMinutesToCharge)
         {
             GarageCard card;
-            if (m_Vehicles.TryGetValue(i_LicenseNumber, out card))
+            if (R_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 if (card.VehicleToFix.Engine is ElectricEngine)
                 {
-                    card.VehicleToFix.Engine.FillUpEnergy(i_NumOfMinutesToCharge, GasEngine.eGasType.None);
+                    card.VehicleToFix.Engine.FillUpEnergy(i_NumOfMinutesToCharge);
                 }      
             }
         }
@@ -113,12 +123,12 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_Vehicles[i_LicenseNumber];
+                return R_Vehicles[i_LicenseNumber];
             }
 
             set
             {
-                m_Vehicles[i_LicenseNumber] = value;
+                R_Vehicles[i_LicenseNumber] = value;
             }
         }
 
