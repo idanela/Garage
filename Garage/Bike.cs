@@ -64,7 +64,7 @@
         {
             return base.ToString() + string.Format(@"
 EngineVolume: {0}
-Lisence kind: {1}
+License kind: {1}
 ",
 m_EngineVolume,m_LicenceType);
         }
