@@ -92,7 +92,7 @@ namespace Ex03.GarageLogic
 
             if (m_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
-                card.VehicleToFix.Engine.FillUpEnergy(i_AmountToFill,i_GasType);
+                card.VehicleToFix.Engine.FillUpEnergy(i_AmountToFill);
             }
         }
         
@@ -103,7 +103,7 @@ namespace Ex03.GarageLogic
             {
                 if (card.VehicleToFix.Engine is ElectricEngine)
                 {
-                    card.VehicleToFix.Engine.FillUpEnergy(i_NumOfMinutesToCharge, GasEngine.eGasType.None);
+                    card.VehicleToFix.Engine.FillUpEnergy(i_NumOfMinutesToCharge);
                 }      
             }
         }
