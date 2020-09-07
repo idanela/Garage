@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         private Vehicle m_VehicleToFix;
         private readonly string r_OwnersName;
         private readonly string r_PhoneNumber;
-        private eStatus m_StatusInGarage;
+        private  eStatus m_StatusInGarage;
 
         public GarageCard(string i_OwnersName, string i_PhoneNumber, Vehicle i_CarToFix)
         {
