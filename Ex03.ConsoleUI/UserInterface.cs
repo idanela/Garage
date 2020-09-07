@@ -27,7 +27,8 @@ namespace Ex03.ConsoleUI
             InflateWheel,
             FillGasEngine,
             ChargeElectricEngine,
-            ShowVehicleDetails
+            ShowVehicleDetails,
+            Exit
         }
 
         // Methods:
@@ -47,11 +48,11 @@ namespace Ex03.ConsoleUI
                 showMenuOptions();
                 Enum.TryParse(Utilities.GetUserInput(), out menuOption);
                 // Check valid input.
-                menu(menuOption);
+                menu(menuOption, ref wantToExitProgram);
             }
         }
 
-        private static void menu(eMenuOption i_OptionFromMenu)
+        private static void menu(eMenuOption i_OptionFromMenu, ref bool i_WantToExitProgram)
         {
             switch (i_OptionFromMenu)
             {
@@ -75,6 +76,9 @@ namespace Ex03.ConsoleUI
                     break;
                 case eMenuOption.ShowVehicleDetails:
                     showVehiclesDetails();
+                    break;
+                case eMenuOption.Exit:
+                    i_WantToExitProgram = true;
                     break;
             }
         }
@@ -191,9 +195,15 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("Please enter a amount of gas to fill:");
                 float.TryParse(Utilities.GetUserInput(), out amountOfGasToFill);
                 Console.WriteLine("Please enter the type of gas:");
-                GasEngine.eGasType.TryParse(Utilities.GetUserInput(), out gasType);
+                Enum.TryParse(Utilities.GetUserInput(), out gasType);
                 // Check gas type
-                (r_Garage[licenseNumber].VehicleToFix.Engine as GasEngine).ContainSameGasType(gasType);
+                while (!(r_Garage[licenseNumber].VehicleToFix.Engine as GasEngine).ContainSameGasType(gasType))
+                {
+                    GasEngine.eGasType vehicleGasType =
+                        (r_Garage[licenseNumber].VehicleToFix.Engine as GasEngine).GasType;
+                    Console.WriteLine("You entered wrong gas type. The gas type is {0}. Please try again.", vehicleGasType);
+                    Enum.TryParse(Utilities.GetUserInput(), out gasType);
+                }
                 r_Garage.FillGas(licenseNumber, gasType, amountOfGasToFill);
             }
             catch (ValueOutOfRangeException valueOutOfRangeException)

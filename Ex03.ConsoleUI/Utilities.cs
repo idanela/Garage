@@ -53,11 +53,11 @@ namespace Ex03.ConsoleUI
             o_OwnerPhoneNumber = Utilities.GetUserInput();
         }
 
-        public static string GetWheelsManufacturer(Vehicle i_Vehicle)
+        public static void GetWheelsManufacturer(Vehicle i_Vehicle)
         {
             Console.WriteLine("Please enter the wheel's manufacturer:");
-            // Update Wheels return GetUserInput();
-            return null; // Delete me!
+            string manufacturer = GetUserInput();
+            // Update wheels in i_Vehicle
         }
 
         public static void CheckValidEngineAndVehicleTypes(
