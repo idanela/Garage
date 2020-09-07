@@ -9,7 +9,7 @@
         public Truck(string i_Model, string i_LicenseNumber, Engine i_Engine)
             : base(i_Model, i_LicenseNumber, i_Engine)
         {
-            UpdateWheels();
+            AddWheels();
         }
 
         //Properties
@@ -45,7 +45,7 @@
             m_CargoVolume = (float)i_CargoVolume;
         }
 
-        public override void UpdateWheels()
+        public override void AddWheels()
         {
             for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Truck; i++)
             {
@@ -57,7 +57,7 @@
         {     
             return base.ToString() + string.Format(@"
 Does it carry Dangerous cargo?: {0}
-CArgo volume is: {1}
+Cargo volume is: {1}
 ",
            m_HasDangerCarry, m_CargoVolume); 
         }

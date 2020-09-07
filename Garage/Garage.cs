@@ -36,18 +36,18 @@ namespace Ex03.GarageLogic
             m_Vehicles.Add(i_Vehicle.i_LicenseNumber, new GarageCard(i_OwnersName, i_PhoneNumber, i_Vehicle));          
         }
 
-        public List <GarageCard> GetListOfSameStatus(GarageCard.eStatus i_Staus)
+        public List <string> GetListOfSameStatus(GarageCard.eStatus i_Staus)
         {
-            List<GarageCard> filteredCards = new List<GarageCard>();
+            List<string> filteredLicsenceNubers = new List<string>();
             foreach(KeyValuePair<string, GarageCard> pair in m_Vehicles)
             {
                 if(pair.Value.Status == i_Staus)
                 {
-                    filteredCards.Add(pair.Value);
+                    filteredLicsenceNubers.Add(pair.Key);
                 }
             }
             
-            return filteredCards;
+            return filteredLicsenceNubers;
         }
 
         public List<string> GetListOfAllLicenseNubers()

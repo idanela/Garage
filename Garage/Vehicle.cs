@@ -67,7 +67,7 @@ namespace Ex03.GarageLogic
 
         public abstract void UpdateProperties(object i_Obj, object i_SecObj);
 
-        public abstract void UpdateWheels();
+        public abstract void AddWheels();
 
         public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
         {
@@ -85,7 +85,7 @@ namespace Ex03.GarageLogic
             return string.Format(@"
 Model:{0}
 license number:{1}
-Wheels:", r_Model,r_LisenceNumber) +m_Wheels.ToString() + m_Engine.ToString();
+Wheels:", r_Model,r_LisenceNumber) + m_Wheels.ToString() + m_Engine.ToString();
         }
     }
 }

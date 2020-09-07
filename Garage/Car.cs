@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
         public Car(string i_Model, string i_LicenseNumber, Engine i_Engine)
             : base(i_Model, i_LicenseNumber, i_Engine)
         {
-            UpdateWheels();
+            AddWheels();
         }
 
         //Properties
@@ -61,7 +61,7 @@ namespace Ex03.GarageLogic
             m_NumOfDoors = (eNumOfDoors)i_NumOfDoors;
         }
 
-        public override void UpdateWheels()
+        public override void AddWheels()
         {
             for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Car; i++)
             {
