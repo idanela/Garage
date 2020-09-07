@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 namespace Ex03.GarageLogic
 {
     public sealed class Car : Vehicle
@@ -39,7 +39,8 @@ namespace Ex03.GarageLogic
 
             set
             {
-                m_NumOfDoors = value;
+              
+                m_NumOfDoors = value;  
             }
         }
 
@@ -51,6 +52,7 @@ namespace Ex03.GarageLogic
             }
             set
             {
+                
                 m_ColorOfCar = value;
             }
         }
