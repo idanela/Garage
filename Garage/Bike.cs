@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+using System.Collections.Generic;
+namespace Ex03.GarageLogic
 {
     public sealed class Bike : Vehicle
     {
@@ -42,6 +44,10 @@
 
             set
             {
+                if(value<=0)
+                {
+                    throw new ArgumentException("The volume of an engine can not be zero or less.");
+                }
                 m_EngineVolume = value;
             }
         }
@@ -58,6 +64,17 @@
             {
                 m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Bike));
             }
+        }
+
+        public override List <string> GetMessagesAndParams(out List<object> i_Members)
+        {
+            List<string> messages = new List<string>();
+            messages.Add("Insert kind of license: ");
+            i_Members.Add(m_LicenceType);
+            messages.Add("Insert Engine volume: ");
+            i_Members.Add(m_EngineVolume);
+
+            return messages;
         }
 
         public override string ToString()

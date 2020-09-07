@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Ex03.GarageLogic
 {
     public sealed class Car : Vehicle
@@ -67,6 +68,17 @@ namespace Ex03.GarageLogic
             {
                 m_Wheels.Add(new Wheel((float)Wheel.eMaxAirPressure.Car));
             }
+        }
+
+        public override List<string> GetMessagesAndParams(out List<object> i_Members)
+        {
+            List<string> messages = new List<string>();
+            messages.Add("Insert color of car: ");
+            i_Members.Add(m_ColorOfCar);
+            messages.Add("Insert numbers of doors: ");
+            i_Members.Add(m_NumOfDoors);
+
+            return messages;
         }
 
         public override string ToString()

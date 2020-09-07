@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Reflection;
 namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
@@ -44,7 +44,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-         public List<Wheel> Wheels
+        public List<Wheel> Wheels
         {
             get
             {
@@ -68,17 +68,44 @@ namespace Ex03.GarageLogic
         public abstract void UpdateProperties(object i_Obj, object i_SecObj);
 
         public abstract void AddWheels();
+        public abstract List<string> GetMessagesAndParams(out List<object> i_Members);
 
         public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
         {
             Wheel wheel;
-            for(int i = 0; i<this.Wheels.Count; i++)
+            for (int i = 0; i < this.Wheels.Count; i++)
             {
                 wheel = m_Wheels[i];
                 wheel.Manufacturer = i_NameOfManufacterer;
                 m_Wheels[i] = wheel;
             }
         }
+
+        public void checkekValidProperty(object i_Param, string i_Input)
+        {
+            object obj = null;
+            object [] args = { i_Input, obj};
+            Type type = i_Param.GetType();
+            MethodInfo tryParse = type.GetMethod("TryParse");
+            if( tryParse != null)
+            {
+                if(!(bool)tryParse.Invoke(null,args))
+                {
+                    throw new ArgumentException("not a valid formated type");
+                }
+                else
+                {
+                    i_Param = obj;
+                }
+                    
+            }
+            else
+            {
+                throw new ArgumentException("not a valid formated type");
+            }
+        }
+
+
 
         public override string ToString()
         {
