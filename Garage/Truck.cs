@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public sealed class Truck : Vehicle
     {
         //Data Members
         private bool m_HasDangerCarry;
-        private float m_TrunkVolume;
+        private float m_CargoVolume;
 
         public Truck(string i_Model, string i_LicenseNumber, Engine i_Engine)
             : base(i_Model, i_LicenseNumber, i_Engine)
@@ -28,27 +26,27 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public float TrunkVolume
+        public float CargoVolume
         {
             get
             {
-                return m_TrunkVolume;
+                return m_CargoVolume;
             }
 
             set
             {
-                if(value<=0)
+                if (value <= 0)
                 {
-                    throw new ArgumentException("Voulme of cargo can not be negative");
+                    throw new ValueOutOfRangeException(1, 1000);
                 }
-                m_TrunkVolume = value;
+                m_CargoVolume = value;
             }
         }
 
         public override void UpdateProperties(object i_HasDangerousCarry, object i_CargoVolume)
         {
             m_HasDangerCarry = (bool)i_HasDangerousCarry;
-            m_TrunkVolume = (float)i_CargoVolume;
+            m_CargoVolume = (float)i_CargoVolume;
         }
 
         public override void AddWheels()
@@ -59,22 +57,13 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override List<string> GetMessagesAndParams(out List<object> i_Members)
-        {
-            List<string> messages = new List<string>();
-            messages.Add("Insert Trunk Volume: ");
-            i_Members.Add(m_TrunkVolume);
-
-            return messages;
-        }
-
         public override string ToString()
         {     
             return base.ToString() + string.Format(@"
 Does it carry Dangerous cargo?: {0}
 Cargo volume is: {1}
 ",
-           m_HasDangerCarry, m_TrunkVolume); 
+           m_HasDangerCarry, m_CargoVolume); 
         }
     }
 }
