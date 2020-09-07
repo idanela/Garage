@@ -13,29 +13,13 @@ namespace Ex03.GarageLogic
         {
         }
 
-        // Methods:
-        public override void FillUpEnergy(float i_EnergyAmountToFill, GasEngine.eGasType i_GasType = GasEngine.eGasType.None)
-        {
-            hasNoGas(i_GasType);
-            base.FillUpEnergy(i_EnergyAmountToFill, GasEngine.eGasType.None);
-        }
-
-        private void hasNoGas(GasEngine.eGasType i_GasType)
-        {
-            if (i_GasType != GasEngine.eGasType.None)
-            {
-                throw new ArgumentException("Electric engine does not use gas. Gas type was ", 
-                    Enum.GetName(typeof(GasEngine.eGasType),i_GasType));
-            }
-        }
-
         // Object Overrides:
         public override string ToString()
         {
             return string.Format(
 @"
 Battery Remain Hours: {0}.",
-CurrentCapacityEnergy);
+CurrentAmountOfEnergy);
         }
     }
 }
