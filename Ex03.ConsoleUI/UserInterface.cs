@@ -99,14 +99,13 @@ namespace Ex03.ConsoleUI
             string ownerName, ownerPhoneNumber;
             string licenseNumber;
 
-            Console.WriteLine("For add a new car please type first the license number:");
-            licenseNumber = Utilities.GetUserInput();
+            Utilities.EnterLicenseNumber("For add a new car please type first the license number:", out licenseNumber);
             if (r_Garage.IsGarageEmpty())
             {
                 Console.WriteLine("To Insert a new car, please fill all the details below:");
                 Vehicle vehicle = Utilities.CreateUserVehicle(licenseNumber);
                 Utilities.GetOwnerDetails(out ownerName, out ownerPhoneNumber);
-                Utilities.GetWheelsMenufacturer(vehicle);
+                Utilities.GetWheelsManufacturer(vehicle);
                 r_Garage.AddToGarage(vehicle, ownerName, ownerPhoneNumber);
             }
             else
@@ -121,8 +120,21 @@ namespace Ex03.ConsoleUI
 
         private static void showLicenseNumberList()
         {
-            Console.WriteLine("To show license number of all vehicles, please enter a vehicle's status to filter:");
-            string statusFilter = Utilities.GetUserInput();
+            GarageCard.eStatus statusInGarage;
+
+            try
+            {
+                Console.WriteLine("To show license number of all vehicles, please enter a vehicle's status to filter:");
+                Enum.TryParse(Utilities.GetUserInput(), out statusInGarage);
+                Utilities.CheckValidStatusInGarage(ref statusInGarage);
+                r_Garage.GetListOfAllLicenseNubers();
+            }
+            catch (ArgumentException argumentException)
+            {
+                // Console.WriteLine(argumentException.Message);
+                throw argumentException;
+            }
+
 
             // if i_StatusFilter == "fixed"
             // Garage.ShowFixedVehiclesLicenseNumber()
@@ -137,10 +149,10 @@ namespace Ex03.ConsoleUI
         private static void changeStatus()
         {
             string licenseNumber;
+            GarageCard.eStatus newStatusInGarage;
 
             Utilities.EnterLicenseNumber("To change a vehicle's status, please enter a license number:", out licenseNumber);
             Console.WriteLine("Please enter a vehicle's new status (unfixed/fix/paid):");
-            GarageCard.eStatus newStatusInGarage;
             Enum.TryParse(Utilities.GetUserInput(), out newStatusInGarage);
             Utilities.CheckValidStatusInGarage(ref newStatusInGarage);
             r_Garage.changeVehicleStatus(licenseNumber, newStatusInGarage);
@@ -180,6 +192,8 @@ namespace Ex03.ConsoleUI
                 float.TryParse(Utilities.GetUserInput(), out amountOfGasToFill);
                 Console.WriteLine("Please enter the type of gas:");
                 GasEngine.eGasType.TryParse(Utilities.GetUserInput(), out gasType);
+                // Check gas type
+                (r_Garage[licenseNumber].VehicleToFix.Engine as GasEngine).ContainSameGasType(gasType);
                 r_Garage.FillGas(licenseNumber, gasType, amountOfGasToFill);
             }
             catch (ValueOutOfRangeException valueOutOfRangeException)

@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         // Constructors:
         public static Vehicle CreateVehicle(string i_LicenseNumber, string i_Model, Engine.eEngineType i_EngineType, eVehicleType i_VehicleType)
         {
-            Vehicle vehicleToCreate = null; // Delete "= null"!!
+            Vehicle vehicleToCreate; 
 
             switch (i_VehicleType)
             {
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
                     vehicleToCreate = new Bike(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, ElectricEngine.k_BikeBatteryTime, GasEngine.eGasType.Octan95));
+                        createEngine(i_EngineType, ElectricEngine.k_BikeBatteryTime));
                     break;
                 case eVehicleType.Bike:
                     vehicleToCreate = new Bike(
@@ -38,26 +38,29 @@ namespace Ex03.GarageLogic
                     vehicleToCreate = new Car(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, ElectricEngine.k_CarBatteryTime, GasEngine.eGasType.Octan95));
+                        createEngine(i_EngineType, ElectricEngine.k_CarBatteryTime));
                     break;
                 case eVehicleType.Car:
                     vehicleToCreate = new Car(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, GasEngine.k_CarTank, GasEngine.eGasType.Octan95));
+                        createEngine(i_EngineType, GasEngine.k_CarTank, GasEngine.eGasType.Octan96));
                     break;
                 case eVehicleType.Truck:
                     vehicleToCreate = new Truck(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, GasEngine.k_TruckTank, GasEngine.eGasType.Octan95));
+                        createEngine(i_EngineType, GasEngine.k_TruckTank, GasEngine.eGasType.Soler));
                     break;
             }
 
             return vehicleToCreate;
         }
 
-        private static Engine createEngine(Engine.eEngineType i_EngineType, float i_MaxCapacity, GasEngine.eGasType i_GasType)
+        private static Engine createEngine(
+            Engine.eEngineType i_EngineType, 
+            float i_MaxCapacity, 
+            GasEngine.eGasType i_GasType = GasEngine.eGasType.None)
         {
             Engine engine = null;
 
