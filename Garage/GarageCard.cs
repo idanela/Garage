@@ -62,6 +62,15 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override string ToString()
+        {
+            return string.Format(@"
+Owners name: {0}
+Phone number: {1}
+Vehicle status:{2}
+Vehicle detail:
+", OwnersName, PhoneNumber, Status) + VehicleToFix.ToString();
+        }
 
     }
 }

@@ -17,7 +17,7 @@
         public Bike(string i_Model, string i_LicenseNumber, Engine i_Engine)
            : base(i_Model, i_LicenseNumber, i_Engine)
         {
-            UpdateWheels();
+            AddWheels();
         }
 
         //Properties
@@ -52,7 +52,7 @@
             m_LicenceType = (eLicenceType)i_LicenseType;
         }
 
-        public override void UpdateWheels()
+        public override void AddWheels()
         {
             for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Bike; i++)
             {
