@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Ex03.GarageLogic
 {
     public sealed class Car : Vehicle
@@ -39,7 +41,11 @@ namespace Ex03.GarageLogic
 
             set
             {
-              
+                if (!Enum.IsDefined(typeof(eNumOfDoors), value))
+                {
+                    throw new ArgumentException("value is not one of the options ");
+                }
+
                 m_NumOfDoors = value;  
             }
         }
@@ -52,7 +58,11 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                
+                if (!Enum.IsDefined(typeof(eColorOfCar), value))
+                {
+                    throw new ArgumentException("value is not one of the options ");
+                }
+
                 m_ColorOfCar = value;
             }
         }
@@ -71,6 +81,14 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override Dictionary<string, object> GetMessagesAndParams()
+        {
+            Dictionary<string, object> request = new Dictionary<string, object>();
+
+            request.Add("Insert number of doors: ", m_NumOfDoors);
+            request.Add("Insert color of car: ", m_ColorOfCar);
+            return request;
+        }
         public override string ToString()
         {
             return base.ToString() + string.Format(@"

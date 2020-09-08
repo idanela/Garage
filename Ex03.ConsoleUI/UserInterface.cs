@@ -202,7 +202,7 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine("You entered wrong gas type. The gas type is {0}. Please try again.", vehicleGasType);
                     Enum.TryParse(Utilities.GetUserInput(), out gasType);
                 }
-                r_Garage.FillGas(licenseNumber, gasType, amountOfGasToFill);
+                r_Garage.FillEnergy(licenseNumber, gasType, amountOfGasToFill);
             }
             catch (ValueOutOfRangeException valueOutOfRangeException)
             {

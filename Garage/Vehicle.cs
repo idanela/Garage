@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
         public abstract void UpdateProperties(object i_Obj, object i_SecObj);
 
         public abstract void AddWheels();
-        public abstract List<string> GetMessagesAndParams(out List<object> i_Members);
+        public abstract Dictionary<string,object> GetMessagesAndParams();
 
         public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
         {
@@ -96,8 +96,7 @@ namespace Ex03.GarageLogic
                 else
                 {
                     i_Param = obj;
-                }
-                    
+                }                 
             }
             else
             {
@@ -105,7 +104,28 @@ namespace Ex03.GarageLogic
             }
         }
 
-
+        public void checkekIfValidProperty<T>(T i_Param, string i_Input)
+        {
+            var typeKind = typeof(T);
+            object[] args = { i_Input, typeKind.MakeByRefType() };
+            Type type = i_Param.GetType();
+            MethodInfo tryParse = type.GetMethod("TryParse");
+            if (tryParse != null)
+            {
+                if (!(bool)tryParse.Invoke(null, args))
+                {
+                    throw new ArgumentException("not a valid formated type");
+                }
+                else
+                {
+                    i_Param = (T)args[1];
+                }
+            }
+            else
+            {
+                throw new ArgumentException("not a valid formated type");
+            }
+        }
 
         public override string ToString()
         {

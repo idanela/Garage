@@ -89,32 +89,20 @@ namespace Ex03.GarageLogic
 
                 for (int i = 0; i<card.VehicleToFix.Wheels.Count; i++)
                 {
-                    wheel =card.VehicleToFix.Wheels[i];
+                    wheel = card.VehicleToFix.Wheels[i];
                     wheel.CurrentAirPressure = card.VehicleToFix.Wheels[i].MaxAirPressure;
                     card.VehicleToFix.Wheels[i] = wheel;
                 }              
             }     
         }
 
-        public void FillGas(string i_LicenseNumber, GasEngine.eGasType i_GasType, float i_AmountToFill)
+        public void FillEnergy(string i_LicenseNumber, GasEngine.eGasType i_GasType, float i_AmountToFill)
         {
             GarageCard card;
 
             if (R_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 card.VehicleToFix.Engine.FillUpEnergy(i_AmountToFill);
-            }
-        }
-        
-        public void ChargeElectricVehicle(string i_LicenseNumber, float i_NumOfMinutesToCharge)
-        {
-            GarageCard card;
-            if (R_Vehicles.TryGetValue(i_LicenseNumber, out card))
-            {
-                if (card.VehicleToFix.Engine is ElectricEngine)
-                {
-                    card.VehicleToFix.Engine.FillUpEnergy(i_NumOfMinutesToCharge);
-                }      
             }
         }
 
