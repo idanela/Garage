@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Ex03.GarageLogic
 {
     public struct Wheel
@@ -75,7 +77,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException(0, i_AirPressure);
+                throw new ValueOutOfRangeException(0, MaxAirPressure);
             }
         }
 
