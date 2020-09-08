@@ -43,7 +43,7 @@ namespace Ex03.GarageLogic
             {
                 if (!Enum.IsDefined(typeof(eNumOfDoors), value))
                 {
-                    throw new ArgumentException("value is not one of the options ");
+                    throw new ValueOutOfRangeException((float)eNumOfDoors.One, (float)eNumOfDoors.Four);
                 }
 
                 m_NumOfDoors = value;  

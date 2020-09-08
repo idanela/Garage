@@ -96,7 +96,7 @@ namespace Ex03.GarageLogic
             }     
         }
 
-        public void FillEnergy(string i_LicenseNumber, GasEngine.eGasType i_GasType, float i_AmountToFill)
+        public void FillEnergy(string i_LicenseNumber,float i_AmountToFill)
         {
             GarageCard card;
 

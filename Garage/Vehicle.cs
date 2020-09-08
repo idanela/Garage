@@ -13,6 +13,7 @@ namespace Ex03.GarageLogic
 
         protected Vehicle(string i_Model, string i_LicenseNumber, Engine i_Engine)
         {
+            m_Wheels = new List<Wheel>();
             r_Model = i_Model;
             r_LisenceNumber = i_LicenseNumber;
             m_PrecentageOfEnergyLeft = 0;
@@ -83,6 +84,8 @@ namespace Ex03.GarageLogic
 
         public void checkekValidProperty(object i_Param, string i_Input)
         {
+           
+           
             object obj = null;
             object [] args = { i_Input, obj};
             Type type = i_Param.GetType();
@@ -107,6 +110,8 @@ namespace Ex03.GarageLogic
         public void checkekIfValidProperty<T>(T i_Param, string i_Input)
         {
             var typeKind = typeof(T);
+            Type ty = typeof(T);
+            
             object[] args = { i_Input, typeKind.MakeByRefType() };
             Type type = i_Param.GetType();
             MethodInfo tryParse = type.GetMethod("TryParse");
