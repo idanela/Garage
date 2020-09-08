@@ -1,4 +1,5 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+namespace Ex03.GarageLogic
 {
     public sealed class Bike : Vehicle
     {

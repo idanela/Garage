@@ -105,7 +105,28 @@ namespace Ex03.GarageLogic
             }
         }
 
-
+        public void checkekIfValidProperty<T>(T i_Param, string i_Input)
+        {
+            var typeKind = typeof(T);
+            object[] args = { i_Input, typeKind.MakeByRefType() };
+            Type type = i_Param.GetType();
+            MethodInfo tryParse = type.GetMethod("TryParse");
+            if (tryParse != null)
+            {
+                if (!(bool)tryParse.Invoke(null, args))
+                {
+                    throw new ArgumentException("not a valid formated type");
+                }
+                else
+                {
+                    i_Param = (T)args[1];
+                }
+            }
+            else
+            {
+                throw new ArgumentException("not a valid formated type");
+            }
+        }
 
         public override string ToString()
         {
