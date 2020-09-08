@@ -202,7 +202,7 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine("You entered wrong gas type. The gas type is {0}. Please try again.", vehicleGasType);
                     Enum.TryParse(Utilities.GetUserInput(), out gasType);
                 }
-                r_Garage.FillEnergy(licenseNumber, gasType, amountOfGasToFill);
+                r_Garage.FillEnergy(licenseNumber, amountOfGasToFill);
             }
             catch (ValueOutOfRangeException valueOutOfRangeException)
             {
@@ -215,7 +215,6 @@ namespace Ex03.ConsoleUI
         {
             string licenseNumber;
             float amountOfCharge;
-            GasEngine.eGasType gasType;
             
             Utilities.EnterLicenseNumber("To charge the battery, please enter a license number:", out licenseNumber);
             while (!r_Garage.IsInGarage(licenseNumber))
@@ -228,7 +227,7 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Please enter a amount of charging (in hours):");
                 float.TryParse(Utilities.GetUserInput(), out amountOfCharge);
-                r_Garage.ChargeElectricCar(licenseNumber, amountOfCharge);
+                r_Garage.FillEnergy(licenseNumber, amountOfCharge);
             }
             catch (ValueOutOfRangeException valueOutOfRangeException)
             {

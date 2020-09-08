@@ -15,11 +15,23 @@ namespace Ex03.ConsoleUI
             ManufectureVehicle.eVehicleType vehicleType;
 
             Console.WriteLine("Please enter the type of your vehicle:");
-            Enum.TryParse(Utilities.GetUserInput(), out vehicleType);
+            while (!Enum.TryParse(Utilities.GetUserInput(), out vehicleType))
+            {
+                Console.WriteLine("The only available vehicle types are: {0}, {1}, {2}",
+                   ManufectureVehicle.eVehicleType.Car,
+                   ManufectureVehicle.eVehicleType.Bike,
+                   ManufectureVehicle.eVehicleType.Truck);
+            }          
             Console.WriteLine("Please enter the model:");
             model = Utilities.GetUserInput();
             Console.WriteLine("Please enter the engine type:");
-            Enum.TryParse(Utilities.GetUserInput(), out engineType);
+
+            while(!Enum.TryParse(Utilities.GetUserInput(), out engineType))
+            {
+                Console.WriteLine("The only available engine types are: {0}, {1}",
+                   Engine.eEngineType.Electric,
+                   Engine.eEngineType.Gas);
+            }
             Utilities.CheckValidEngineAndVehicleTypes(ref engineType, ref vehicleType);
 
 
@@ -31,28 +43,26 @@ namespace Ex03.ConsoleUI
 
         public static void UpdateProperties(Vehicle i_Vehicle)
         {
-            int i = 0;
-            List<object> properties = new List<object>();
-
+            Dictionary<string, object> msgProperties = i_Vehicle.GetMessagesAndParams();
+            string messageKey = string.Empty;
             try
             {
-                List<string> msgStrings = i_Vehicle.GetMessagesAndParams(out properties);
-                foreach (string msgString in msgStrings)
+                foreach (KeyValuePair<string, object> pair in msgProperties)
                 {
-                    Console.WriteLine(msgString);
-                    i_Vehicle.checkekValidProperty(properties[i], GetUserInput());
-                    i++;
+                    messageKey = pair.Key;
+                    Console.WriteLine(messageKey);
+                    i_Vehicle.checkekValidProperty(pair.Value, GetUserInput());
                 }
             }
             catch (ArgumentException argumentException)
             {
                 Console.WriteLine(argumentException.Message);
-                i_Vehicle.checkekValidProperty(properties[i], GetUserInput());
+                i_Vehicle.checkekValidProperty(messageKey, GetUserInput());
             }
             catch (ValueOutOfRangeException valueOutOfRangeException)
             {
                 Console.WriteLine(valueOutOfRangeException.Message);
-                i_Vehicle.checkekValidProperty(properties[i], GetUserInput());
+                i_Vehicle.checkekValidProperty(messageKey, GetUserInput());
             }
         }
 
@@ -77,9 +87,10 @@ namespace Ex03.ConsoleUI
         {
             while (!isValidEngineType(io_EngineType))
             {
-                Console.WriteLine("The only available engine types are: {0}, {1}", 
+                Console.WriteLine("The only available engine types are: {0}, {1}",
                     Engine.eEngineType.Electric,
                     Engine.eEngineType.Gas);
+                Enum.TryParse(GetUserInput(), out io_EngineType);
             }
 
             while (!isValidVehicleType(io_VehicleType))
@@ -88,6 +99,7 @@ namespace Ex03.ConsoleUI
                     ManufectureVehicle.eVehicleType.Car,
                     ManufectureVehicle.eVehicleType.Bike,
                     ManufectureVehicle.eVehicleType.Truck);
+                Enum.TryParse(GetUserInput(), out io_VehicleType);
             }
         }
 
@@ -111,9 +123,9 @@ namespace Ex03.ConsoleUI
         private static bool isValidVehicleType(ManufectureVehicle.eVehicleType i_VehicleType)
         {
             bool isValidVehicleType = false;
-            string[] engineTypes = Enum.GetNames(typeof(Engine.eEngineType));
+            string[] vehicleType = Enum.GetNames(typeof(ManufectureVehicle.eVehicleType));
 
-            foreach (string engineType in engineTypes)
+            foreach (string engineType in vehicleType)
             {
                 if (Enum.GetName(typeof(ManufectureVehicle.eVehicleType), i_VehicleType) == engineType)
                 {
