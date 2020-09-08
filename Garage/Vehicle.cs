@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
         public abstract void UpdateProperties(object i_Obj, object i_SecObj);
 
         public abstract void AddWheels();
-        public abstract List<string> GetMessagesAndParams(out List<object> i_Members);
+        public abstract Dictionary<string,object> GetMessagesAndParams();
 
         public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
         {
@@ -96,8 +96,7 @@ namespace Ex03.GarageLogic
                 else
                 {
                     i_Param = obj;
-                }
-                    
+                }                 
             }
             else
             {

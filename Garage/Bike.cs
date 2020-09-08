@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace Ex03.GarageLogic
 {
     public sealed class Bike : Vehicle
@@ -30,6 +31,12 @@ namespace Ex03.GarageLogic
             }
             set
             {
+
+                if (!Enum.IsDefined(typeof(eLicenceType), value))
+                {
+                    throw new ArgumentException("value is not one of the options ");
+                }
+
                 m_LicenceType = value;
             }
         }
@@ -45,8 +52,9 @@ namespace Ex03.GarageLogic
             {
                 if (value <= 0)
                 {
-                    throw new ValueOutOfRangeException(1, 1000);
+                    throw new ArgumentException("Trunk volume can not be negative");
                 }
+                
                 m_EngineVolume = value;
             }
         }
@@ -65,6 +73,14 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override Dictionary<string, object> GetMessagesAndParams()
+        {
+            Dictionary<string, object> request = new Dictionary<string, object>();
+
+            request.Add("Insert Engine volume: ", m_EngineVolume);
+            request.Add("Insert licence type: ", m_LicenceType);
+            return request;
+        }
         public override string ToString()
         {
             return base.ToString() + string.Format(@"

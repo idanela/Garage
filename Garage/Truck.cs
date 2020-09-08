@@ -1,4 +1,5 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+namespace Ex03.GarageLogic
 {
     public sealed class Truck : Vehicle
     {
@@ -57,6 +58,14 @@
             }
         }
 
+
+        public override Dictionary<string, object> GetMessagesAndParams()
+        {
+            Dictionary<string, object> request = new Dictionary<string, object>();
+
+            request.Add("Insert cargo volume: ", m_CargoVolume);
+            return request;
+        }
         public override string ToString()
         {     
             return base.ToString() + string.Format(@"
