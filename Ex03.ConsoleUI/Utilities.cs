@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -13,11 +15,11 @@ namespace Ex03.ConsoleUI
             ManufectureVehicle.eVehicleType vehicleType;
 
             Console.WriteLine("Please enter the type of your vehicle:");
-            ManufectureVehicle.eVehicleType.TryParse(Utilities.GetUserInput(), out vehicleType);
+            Enum.TryParse(Utilities.GetUserInput(), out vehicleType);
             Console.WriteLine("Please enter the model:");
             model = Utilities.GetUserInput();
             Console.WriteLine("Please enter the engine type:");
-            Engine.eEngineType.TryParse(Utilities.GetUserInput(), out engineType);
+            Enum.TryParse(Utilities.GetUserInput(), out engineType);
             Utilities.CheckValidEngineAndVehicleTypes(ref engineType, ref vehicleType);
 
 
@@ -29,19 +31,28 @@ namespace Ex03.ConsoleUI
 
         public static void UpdateProperties(Vehicle i_Vehicle)
         {
-            // i_Vehicle.UpdateProperties();
-            if (i_Vehicle is Car)
+            int i = 0;
+            List<object> properties = new List<object>();
+
+            try
             {
-                Utilities.GetCarProperties(i_Vehicle);
+                List<string> msgStrings = i_Vehicle.GetMessagesAndParams(out properties);
+                foreach (string msgString in msgStrings)
+                {
+                    Console.WriteLine(msgString);
+                    i_Vehicle.checkekValidProperty(properties[i], GetUserInput());
+                    i++;
+                }
             }
-            else if (i_Vehicle is Bike)
+            catch (ArgumentException argumentException)
             {
-                Utilities.GetBikeProperties(i_Vehicle);
+                Console.WriteLine(argumentException.Message);
+                i_Vehicle.checkekValidProperty(properties[i], GetUserInput());
             }
-            else
+            catch (ValueOutOfRangeException valueOutOfRangeException)
             {
-                // Is a truck.
-                Utilities.GetTruckProperties(i_Vehicle);
+                Console.WriteLine(valueOutOfRangeException.Message);
+                i_Vehicle.checkekValidProperty(properties[i], GetUserInput());
             }
         }
 
@@ -57,7 +68,7 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Please enter the wheel's manufacturer:");
             string manufacturer = GetUserInput();
-            // Update wheels in i_Vehicle
+            i_Vehicle.UpdatManufactererOfWheels(manufacturer);
         }
 
         public static void CheckValidEngineAndVehicleTypes(
@@ -114,119 +125,119 @@ namespace Ex03.ConsoleUI
             return isValidVehicleType;
         }
 
-        public static void GetCarProperties(Vehicle i_Car)
-        {
-            Console.WriteLine("Please enter the number of doors:");
-            ushort numOfDoors = ushort.Parse(GetUserInput());
-            Console.WriteLine("Please enter the color of the car:");
-            Car.eColorOfCar colorOfCar;
-            Enum.TryParse(GetUserInput(), out colorOfCar);
-            Utilities.CheckValidCarProperties(i_Car, ref numOfDoors, ref colorOfCar);
-            i_Car.UpdateProperties(numOfDoors, colorOfCar);
-        }
+        //public static void GetCarProperties(Vehicle i_Car)
+        //{
+        //    Console.WriteLine("Please enter the number of doors:");
+        //    ushort numOfDoors = ushort.Parse(GetUserInput());
+        //    Console.WriteLine("Please enter the color of the car:");
+        //    Car.eColorOfCar colorOfCar;
+        //    Enum.TryParse(GetUserInput(), out colorOfCar);
+        //    Utilities.CheckValidCarProperties(i_Car, ref numOfDoors, ref colorOfCar);
+        //    i_Car.UpdateProperties(numOfDoors, colorOfCar);
+        //}
 
-        public static void GetBikeProperties(Vehicle i_Bike)
-        {
-            Console.WriteLine("Please enter the license type:");
-            Bike.eLicenceType licenseType;
-            Enum.TryParse(GetUserInput(), out licenseType);
-            Console.WriteLine("Please enter the engine volume:");
-            int engineVolume = int.Parse(GetUserInput());
-            Utilities.CheckValidBikeProperties(i_Bike, ref licenseType);
-            i_Bike.UpdateProperties(licenseType, engineVolume);
-        }
+        //public static void GetBikeProperties(Vehicle i_Bike)
+        //{
+        //    Console.WriteLine("Please enter the license type:");
+        //    Bike.eLicenceType licenseType;
+        //    Enum.TryParse(GetUserInput(), out licenseType);
+        //    Console.WriteLine("Please enter the engine volume:");
+        //    int engineVolume = int.Parse(GetUserInput());
+        //    Utilities.CheckValidBikeProperties(i_Bike, ref licenseType);
+        //    i_Bike.UpdateProperties(licenseType, engineVolume);
+        //}
 
 
-        public static void GetTruckProperties(Vehicle i_Truck)
-        {
-            Console.WriteLine("Please enter the load volume of your truck:");
-            float loadVolume = float.Parse(GetUserInput());
-            Console.WriteLine("Does the truck contains dangerous carry? Enter 'Y' for yes or 'N' for no.");
-            string answer = GetUserInput();
-            checkValidTruckProperties(ref answer);
-            bool containDangerousCarry = answer == "Y";
-            i_Truck.UpdateProperties(containDangerousCarry, loadVolume);
-        }
+        //public static void GetTruckProperties(Vehicle i_Truck)
+        //{
+        //    Console.WriteLine("Please enter the load volume of your truck:");
+        //    float loadVolume = float.Parse(GetUserInput());
+        //    Console.WriteLine("Does the truck contains dangerous carry? Enter 'Y' for yes or 'N' for no.");
+        //    string answer = GetUserInput();
+        //    checkValidTruckProperties(ref answer);
+        //    bool containDangerousCarry = answer == "Y";
+        //    i_Truck.UpdateProperties(containDangerousCarry, loadVolume);
+        //}
 
-        public static void CheckValidCarProperties(Vehicle i_Car, ref ushort io_NumOfDoors, ref Car.eColorOfCar io_ColorOfCar)
-        {
-            while (!isValidNumOfDoors(io_NumOfDoors))
-            {
-                Console.WriteLine("The range of number of doors is between {0} to {1}", 2, 5);
-                io_NumOfDoors = UInt16.Parse(GetUserInput());
-            }
+        //public static void CheckValidCarProperties(Vehicle i_Car, ref ushort io_NumOfDoors, ref Car.eColorOfCar io_ColorOfCar)
+        //{
+        //    while (!isValidNumOfDoors(io_NumOfDoors))
+        //    {
+        //        Console.WriteLine("The range of number of doors is between {0} to {1}", 2, 5);
+        //        io_NumOfDoors = UInt16.Parse(GetUserInput());
+        //    }
 
-            while (!isValidColorOfCar(io_ColorOfCar))
-            {
-                Console.WriteLine("The range of optional colors are {0}, {1}, {2}, {3}",
-                    Car.eColorOfCar.Gray,
-                    Car.eColorOfCar.Green,
-                    Car.eColorOfCar.Red,
-                    Car.eColorOfCar.White);
-                Enum.TryParse(GetUserInput(), out io_ColorOfCar);
-            }
-        }
+        //    while (!isValidColorOfCar(io_ColorOfCar))
+        //    {
+        //        Console.WriteLine("The range of optional colors are {0}, {1}, {2}, {3}",
+        //            Car.eColorOfCar.Gray,
+        //            Car.eColorOfCar.Green,
+        //            Car.eColorOfCar.Red,
+        //            Car.eColorOfCar.White);
+        //        Enum.TryParse(GetUserInput(), out io_ColorOfCar);
+        //    }
+        //}
 
-        private static bool isValidNumOfDoors(ushort i_NumOfDoors)
-        {
-            return i_NumOfDoors > 2 || i_NumOfDoors < 5;
-        }
+        //private static bool isValidNumOfDoors(ushort i_NumOfDoors)
+        //{
+        //    return i_NumOfDoors > 2 || i_NumOfDoors < 5;
+        //}
 
-        private static bool isValidColorOfCar(Car.eColorOfCar i_ColorOfCar)
-        {
-            bool isValidColor = false;
-            string[] colorsOfCar = Enum.GetNames(typeof(Car.eColorOfCar));
+        //private static bool isValidColorOfCar(Car.eColorOfCar i_ColorOfCar)
+        //{
+        //    bool isValidColor = false;
+        //    string[] colorsOfCar = Enum.GetNames(typeof(Car.eColorOfCar));
 
-            foreach (string color in colorsOfCar)
-            {
-                if (Enum.GetName(typeof(Car.eColorOfCar), i_ColorOfCar) == color)
-                {
-                    isValidColor = true;
-                    break;
-                }
-            }
+        //    foreach (string color in colorsOfCar)
+        //    {
+        //        if (Enum.GetName(typeof(Car.eColorOfCar), i_ColorOfCar) == color)
+        //        {
+        //            isValidColor = true;
+        //            break;
+        //        }
+        //    }
 
-            return isValidColor;
-        }
+        //    return isValidColor;
+        //}
 
-        public static void CheckValidBikeProperties(Vehicle i_Bike, ref Bike.eLicenceType io_LicenseType)
-        {
-            while (!isValidLicenseType(io_LicenseType))
-            {
-                Console.WriteLine("The details you entered are not valid. Please try again.");
-                Enum.TryParse(GetUserInput(), out io_LicenseType);
-            }
-        }
+        //public static void CheckValidBikeProperties(Vehicle i_Bike, ref Bike.eLicenceType io_LicenseType)
+        //{
+        //    while (!isValidLicenseType(io_LicenseType))
+        //    {
+        //        Console.WriteLine("The details you entered are not valid. Please try again.");
+        //        Enum.TryParse(GetUserInput(), out io_LicenseType);
+        //    }
+        //}
 
-        private static bool isValidLicenseType(Bike.eLicenceType i_LicenseType)
-        {
-            bool isValidNumOfDoors = false;
-            string[] licenseTypes = Enum.GetNames(typeof(Bike.eLicenceType));
+        //private static bool isValidLicenseType(Bike.eLicenceType i_LicenseType)
+        //{
+        //    bool isValidNumOfDoors = false;
+        //    string[] licenseTypes = Enum.GetNames(typeof(Bike.eLicenceType));
 
-            foreach (string licenseType in licenseTypes)
-            {
-                if (Enum.GetName(typeof(Bike.eLicenceType),i_LicenseType) == licenseType))
-                {
-                    isValidNumOfDoors = true;
-                }
-            }
+        //    foreach (string licenseType in licenseTypes)
+        //    {
+        //        if (Enum.GetName(typeof(Bike.eLicenceType),i_LicenseType) == licenseType))
+        //        {
+        //            isValidNumOfDoors = true;
+        //        }
+        //    }
 
-            return isValidNumOfDoors;
-        }
+        //    return isValidNumOfDoors;
+        //}
 
-        private static void checkValidTruckProperties(ref string io_ContainDangerousCarry)
-        {
-            while (isValidContainDangerousAnswer(io_ContainDangerousCarry))
-            {
-                Console.WriteLine("You can enter only 'Y' or 'N' for answer. Please try again.");
-                io_ContainDangerousCarry = Console.ReadLine();
-            }
-        }
+        //private static void checkValidTruckProperties(ref string io_ContainDangerousCarry)
+        //{
+        //    while (isValidContainDangerousAnswer(io_ContainDangerousCarry))
+        //    {
+        //        Console.WriteLine("You can enter only 'Y' or 'N' for answer. Please try again.");
+        //        io_ContainDangerousCarry = Console.ReadLine();
+        //    }
+        //}
 
-        private static bool isValidContainDangerousAnswer(string io_ContainDangerousCarry)
-        {
-            return io_ContainDangerousCarry == "Y" || io_ContainDangerousCarry == "N";
-        }
+        //private static bool isValidContainDangerousAnswer(string io_ContainDangerousCarry)
+        //{
+        //    return io_ContainDangerousCarry == "Y" || io_ContainDangerousCarry == "N";
+        //}
 
         public static void CheckValidStatusInGarage(ref GarageCard.eStatus io_StatusInGarage)
         {

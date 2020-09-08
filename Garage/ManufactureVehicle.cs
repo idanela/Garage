@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         // Constructors:
         public static Vehicle CreateVehicle(string i_LicenseNumber, string i_Model, Engine.eEngineType i_EngineType, eVehicleType i_VehicleType)
         {
-            Vehicle vehicleToCreate; 
+            Vehicle vehicleToCreate = null; 
 
             switch (i_VehicleType)
             {

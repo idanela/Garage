@@ -50,7 +50,7 @@
             }
             else
             {
-                throw new ValueOutOfRangeException(0, i_EnergyAmountToFill);
+                throw new ValueOutOfRangeException(0, MaxCapacityEnergy);
             }
         }
     }
