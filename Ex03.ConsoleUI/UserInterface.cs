@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Ex03.GarageLogic;
 
@@ -86,14 +87,15 @@ namespace Ex03.ConsoleUI
         private static void showMenuOptions()
         {
             string menuOptions = string.Format(
-                @"
-1. Insert a new car.
+@"
+1. Insert a new vehicle.
 2. Show license number of all vehicles.
 3. Change car status (unfixed/fixed/paid).
 4. Inflate wheels.
 5. Fill gas in vehicle.
 6. Charge vehicle.
-7. Show vehicle details.");
+7. Show vehicle details.
+8. Exit.");
 
             Console.WriteLine(menuOptions);
         }
@@ -131,23 +133,19 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("To show license number of all vehicles, please enter a vehicle's status to filter:");
                 Enum.TryParse(Utilities.GetUserInput(), out statusInGarage);
                 Utilities.CheckValidStatusInGarage(ref statusInGarage);
-                r_Garage.GetListOfAllLicenseNubers();
+                List<string> licenseNUmbers = r_Garage.GetListOfSameStatus(statusInGarage);
+
+                Console.WriteLine("The license numbers of the vehicles in the garage are:");
+                foreach (string licenseNUmber in licenseNUmbers)
+                {
+                    Console.WriteLine(licenseNUmber);
+                }
             }
             catch (ArgumentException argumentException)
             {
                 // Console.WriteLine(argumentException.Message);
                 throw argumentException;
             }
-
-
-            // if i_StatusFilter == "fixed"
-            // Garage.ShowFixedVehiclesLicenseNumber()
-
-            // else if i_StatusFilter == "unfixed"
-            // Garage.ShowUnfixedVehiclesLicenseNumber()
-
-            // else
-            // Garga.ShowAllVehiclesLicenseNumber()
         }
 
         private static void changeStatus()
@@ -242,6 +240,11 @@ namespace Ex03.ConsoleUI
         private static void showVehiclesDetails()
         {
             // Show all details.
+            Console.WriteLine("All the vehicle's details in the garage are:");
+            foreach (KeyValuePair<string, GarageCard> keyValuePair in r_Garage.Vehicles)
+            {
+                Console.WriteLine(r_Garage[keyValuePair.Key]);
+            }
         }
     }
 }
