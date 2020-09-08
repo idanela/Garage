@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
 
         public void AddToGarage(Vehicle i_Vehicle, string i_OwnersName,string i_PhoneNumber)
         {
-            R_Vehicles.Add(i_Vehicle.i_LicenseNumber, new GarageCard(i_OwnersName, i_PhoneNumber, i_Vehicle));          
+            R_Vehicles.Add(i_Vehicle.LicenseNumber, new GarageCard(i_OwnersName, i_PhoneNumber, i_Vehicle));          
         }
 
         public List <string> GetListOfSameStatus(GarageCard.eStatus? i_Staus)

@@ -9,3 +9,14 @@ C:\Users\User\Desktop\C#\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.C
 C:\Users\User\Desktop\C#\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CopyComplete
 C:\Users\User\Desktop\C#\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.exe
 C:\Users\User\Desktop\C#\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.pdb
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe.config
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.pdb
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\bin\Debug\Garage.dll
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\bin\Debug\Garage.pdb
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\bin\Debug\Garage.dll.config
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csprojAssemblyReference.cache
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CopyComplete
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.exe
+C:\Users\elaza\Desktop\Garage\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.pdb

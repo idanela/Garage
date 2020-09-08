@@ -83,10 +83,11 @@ namespace Ex03.GarageLogic
 
         public override Dictionary<string, object> GetMessagesAndParams()
         {
+
             Dictionary<string, object> request = new Dictionary<string, object>();
 
-            request.Add("Insert number of doors: ", m_NumOfDoors);
-            request.Add("Insert color of car: ", m_ColorOfCar);
+            request.Add("Insert number of doors: ",  m_NumOfDoors);
+            request.Add("Insert color of car: ",  m_ColorOfCar);
             return request;
         }
         public override string ToString()
