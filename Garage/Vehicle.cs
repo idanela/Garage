@@ -82,14 +82,13 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void checkekValidProperty(object i_Param, string i_Input)
+        public void checkekValidProperty<T>(T i_Param, string i_Input)
         {
-           
-           
-            object obj = null;
+            T obj = i_Param;
             object [] args = { i_Input, obj};
             Type type = i_Param.GetType();
-            MethodInfo tryParse = type.GetMethod("TryParse");
+            MethodInfo tryParse = type.GetType().GetMethod("TryParse");
+               
             if( tryParse != null)
             {
                 if(!(bool)tryParse.Invoke(null,args))
