@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-
+﻿
 namespace Ex03.GarageLogic
 {
     public class ManufectureVehicle
@@ -16,7 +14,7 @@ namespace Ex03.GarageLogic
         }
 
         // Constructors:
-        public static Vehicle CreateVehicle(string i_LicenseNumber, string i_Model, Engine.eEngineType i_EngineType, eVehicleType i_VehicleType)
+        public static Vehicle CreateVehicle(string i_LicenseNumber, string i_Model, eVehicleType i_VehicleType)
         {
             Vehicle vehicleToCreate = null; 
 
@@ -26,31 +24,31 @@ namespace Ex03.GarageLogic
                     vehicleToCreate = new Bike(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, ElectricEngine.k_BikeBatteryTime));
+                        createEngine(Engine.eEngineType.Electric, ElectricEngine.k_BikeBatteryTime));
                     break;
                 case eVehicleType.Bike:
                     vehicleToCreate = new Bike(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, GasEngine.k_BikeTank, GasEngine.eGasType.Octan95));
+                        createEngine(Engine.eEngineType.Gas, GasEngine.k_BikeTank, GasEngine.eGasType.Octan95));
                     break;
                 case eVehicleType.ElectricCar:
                     vehicleToCreate = new Car(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, ElectricEngine.k_CarBatteryTime));
+                        createEngine(Engine.eEngineType.Electric, ElectricEngine.k_CarBatteryTime));
                     break;
                 case eVehicleType.Car:
                     vehicleToCreate = new Car(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, GasEngine.k_CarTank, GasEngine.eGasType.Octan96));
+                        createEngine(Engine.eEngineType.Gas, GasEngine.k_CarTank, GasEngine.eGasType.Octan96));
                     break;
                 case eVehicleType.Truck:
                     vehicleToCreate = new Truck(
                         i_Model,
                         i_LicenseNumber,
-                        createEngine(i_EngineType, GasEngine.k_TruckTank, GasEngine.eGasType.Soler));
+                        createEngine(Engine.eEngineType.Gas, GasEngine.k_TruckTank, GasEngine.eGasType.Soler));
                     break;
             }
 

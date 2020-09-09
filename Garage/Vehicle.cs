@@ -69,7 +69,7 @@ namespace Ex03.GarageLogic
         public abstract void UpdateProperties(object i_Obj, object i_SecObj);
 
         public abstract void AddWheels();
-        public abstract Dictionary<string,object> GetMessagesAndParams();
+        public abstract Dictionary<string, object> GetMessagesAndParams();
 
         public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
         {
@@ -84,22 +84,22 @@ namespace Ex03.GarageLogic
 
         public void checkekValidProperty(object i_Param, string i_Input)
         {
-           
-           
+
+
             object obj = null;
-            object [] args = { i_Input, obj};
+            object[] args = { i_Input, obj };
             Type type = i_Param.GetType();
             MethodInfo tryParse = type.GetMethod("TryParse");
-            if( tryParse != null)
+            if (tryParse != null)
             {
-                if(!(bool)tryParse.Invoke(null,args))
+                if (!(bool)tryParse.Invoke(null, args))
                 {
                     throw new ArgumentException("not a valid formated type");
                 }
                 else
                 {
                     i_Param = obj;
-                }                 
+                }
             }
             else
             {
@@ -111,7 +111,7 @@ namespace Ex03.GarageLogic
         {
             var typeKind = typeof(T);
             Type ty = typeof(T);
-            
+
             object[] args = { i_Input, typeKind.MakeByRefType() };
             Type type = i_Param.GetType();
             MethodInfo tryParse = type.GetMethod("TryParse");
@@ -137,7 +137,7 @@ namespace Ex03.GarageLogic
             return string.Format(@"
 Model:{0}
 license number:{1}
-Wheels:", r_Model,r_LisenceNumber) + m_Wheels.ToString() + m_Engine.ToString();
+Wheels:", r_Model, r_LisenceNumber) + m_Wheels.ToString() + m_Engine.ToString();
         }
     }
 }
