@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.ComponentModel;
+
 namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
@@ -29,7 +31,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public string i_LicenseNumber
+        public string LicenseNumber
         {
             get
             {
@@ -82,17 +84,30 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void checkekValidProperty(object i_Param, string i_Input)
+        //public static bool Is<T>(this string input)
+        //{
+        //    try
+        //    {
+        //        TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(input);
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
+
+        public void checkekValidProperty<T>(ref T i_Param, string i_Input)
         {
-           
-           
-            object obj = null;
-            object [] args = { i_Input, obj};
+            T obj = default(T);
+            object[] parameters = { i_Input, obj };
             Type type = i_Param.GetType();
-            MethodInfo tryParse = type.GetMethod("TryParse");
-            if( tryParse != null)
+            MethodInfo tryParse = type.GetMethod("TryParse", new[] { typeof(string), type.MakeByRefType() });
+
+            if (tryParse != null)
             {
-                if(!(bool)tryParse.Invoke(null,args))
+                if (!(bool)tryParse.Invoke(null, parameters))
                 {
                     throw new ArgumentException("not a valid formated type");
                 }
