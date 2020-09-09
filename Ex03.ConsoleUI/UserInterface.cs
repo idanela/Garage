@@ -47,6 +47,7 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Please choose an option you want to use from the menu below.");
                 showMenuOptions();
+                Console.Write("Your option to choose: ");
                 Enum.TryParse(Utilities.GetUserInput(), out menuOption);
                 // Check valid input.
                 menu(menuOption, ref wantToExitProgram);
@@ -87,8 +88,7 @@ namespace Ex03.ConsoleUI
         private static void showMenuOptions()
         {
             string menuOptions = string.Format(
-@"
-1. Insert a new vehicle.
+@"1. Insert a new vehicle.
 2. Show license number of all vehicles.
 3. Change car status (unfixed/fixed/paid).
 4. Inflate wheels.
@@ -131,8 +131,13 @@ namespace Ex03.ConsoleUI
             try
             {
                 Console.WriteLine("To show license number of all vehicles, please enter a vehicle's status to filter:");
-                Enum.TryParse(Utilities.GetUserInput(), out statusInGarage);
-                Utilities.CheckValidStatusInGarage(ref statusInGarage);
+                Utilities.ShowEnumTypes(typeof(GarageCard.eStatus));
+                while (!Enum.TryParse(Utilities.GetUserInput(), out statusInGarage))
+                {
+                    Console.WriteLine("The main options to choose from are:");
+                    Utilities.ShowEnumTypes(typeof(GarageCard.eStatus));
+                }
+                // Utilities.CheckValidStatusInGarage(ref statusInGarage);
                 List<string> licenseNUmbers = r_Garage.GetListOfSameStatus(statusInGarage);
 
                 Console.WriteLine("The license numbers of the vehicles in the garage are:");
@@ -155,8 +160,13 @@ namespace Ex03.ConsoleUI
 
             Utilities.EnterLicenseNumber("To change a vehicle's status, please enter a license number:", out licenseNumber);
             Console.WriteLine("Please enter a vehicle's new status (unfixed/fix/paid):");
-            Enum.TryParse(Utilities.GetUserInput(), out newStatusInGarage);
-            Utilities.CheckValidStatusInGarage(ref newStatusInGarage);
+            while (!Enum.TryParse(Utilities.GetUserInput(), out newStatusInGarage))
+            {
+                Console.WriteLine("You can enter only three types of status:");
+                Utilities.ShowEnumTypes(typeof(GarageCard.eStatus));
+            }
+            
+            // Utilities.CheckValidStatusInGarage(ref newStatusInGarage);
             r_Garage.changeVehicleStatus(licenseNumber, newStatusInGarage);
         }
 
