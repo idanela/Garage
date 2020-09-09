@@ -9,7 +9,7 @@
         // Enums:
         public enum eEngineType
         {
-            Gas = 0,
+            Gas = 1,
             Electric
         }
 
@@ -44,7 +44,7 @@
         // Methods:
         public virtual void FillUpEnergy(float i_EnergyAmountToFill)
         {
-            if (CurrentAmountOfEnergy + i_EnergyAmountToFill < MaxCapacityEnergy)
+            if (CurrentAmountOfEnergy + i_EnergyAmountToFill <= MaxCapacityEnergy)
             {
                 m_CurrentAmountOfEnergy += i_EnergyAmountToFill;
             }

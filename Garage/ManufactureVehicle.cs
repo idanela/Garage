@@ -1,12 +1,12 @@
 ﻿
 namespace Ex03.GarageLogic
 {
-    public class ManufectureVehicle
+    public class ManufactureVehicle
     {
         // Enums:
         public enum eVehicleType
         {
-            ElectricBike,
+            ElectricBike = 1,
             Bike,
             ElectricCar,
             Car,
@@ -58,7 +58,7 @@ namespace Ex03.GarageLogic
         private static Engine createEngine(
             Engine.eEngineType i_EngineType, 
             float i_MaxCapacity, 
-            GasEngine.eGasType i_GasType = GasEngine.eGasType.None)
+            GasEngine.eGasType? i_GasType = null)
         {
             Engine engine = null;
 
@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                engine = new GasEngine(i_MaxCapacity, i_GasType);
+                engine = new GasEngine(i_MaxCapacity, (GasEngine.eGasType) i_GasType);
             }
             
             return engine;

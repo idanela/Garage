@@ -16,8 +16,7 @@ namespace Ex03.GarageLogic
         // Enums:
         public enum eGasType
         {
-            None,
-            Octan96,
+            Octan96 = 1,
             Octan95,
             Soler
         }
@@ -41,18 +40,7 @@ namespace Ex03.GarageLogic
         // Methods:
         public bool ContainSameGasType(eGasType i_GasType)
         {
-            bool containSameGasType = false;
-
-            if (r_GasType != i_GasType)
-            {
-                throw new ArgumentException("Incorrect fuel type, engine's fuel type that was entered is ", i_GasType.ToString());
-            }
-            else
-            {
-                containSameGasType = true;
-            }
-
-            return containSameGasType;
+            return r_GasType == i_GasType;
         }
 
 

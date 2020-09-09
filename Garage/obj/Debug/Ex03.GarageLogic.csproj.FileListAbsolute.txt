@@ -1,24 +1,7 @@
-C:\Users\User\Desktop\C#\Garage\Garage\bin\Debug\Garage.dll.config
-C:\Users\User\Desktop\C#\Garage\Garage\bin\Debug\Garage.dll
-C:\Users\User\Desktop\C#\Garage\Garage\bin\Debug\Garage.pdb
-C:\Users\User\Desktop\C#\Garage\Garage\obj\Debug\Ex03.GarageLogic.csprojAssemblyReference.cache
-C:\Users\User\Desktop\C#\Garage\Garage\obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\C#\Garage\Garage\obj\Debug\Garage.dll
-C:\Users\User\Desktop\C#\Garage\Garage\obj\Debug\Garage.pdb
-<<<<<<< HEAD
 C:\Users\erezl\Desktop\Computer Science\.NET-C#\Garage\Garage\bin\Debug\Garage.dll.config
 C:\Users\erezl\Desktop\Computer Science\.NET-C#\Garage\Garage\bin\Debug\Garage.dll
 C:\Users\erezl\Desktop\Computer Science\.NET-C#\Garage\Garage\bin\Debug\Garage.pdb
-C:\Users\erezl\Desktop\Computer Science\.NET-C#\Garage\Garage\obj\Debug\Ex03.GarageLogic.csprojAssemblyReference.cache
 C:\Users\erezl\Desktop\Computer Science\.NET-C#\Garage\Garage\obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache
 C:\Users\erezl\Desktop\Computer Science\.NET-C#\Garage\Garage\obj\Debug\Garage.dll
 C:\Users\erezl\Desktop\Computer Science\.NET-C#\Garage\Garage\obj\Debug\Garage.pdb
-=======
-C:\Users\elaza\Desktop\Garage\Garage\bin\Debug\Garage.dll.config
-C:\Users\elaza\Desktop\Garage\Garage\bin\Debug\Garage.dll
-C:\Users\elaza\Desktop\Garage\Garage\bin\Debug\Garage.pdb
-C:\Users\elaza\Desktop\Garage\Garage\obj\Debug\Ex03.GarageLogic.csprojAssemblyReference.cache
-C:\Users\elaza\Desktop\Garage\Garage\obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache
-C:\Users\elaza\Desktop\Garage\Garage\obj\Debug\Garage.dll
-C:\Users\elaza\Desktop\Garage\Garage\obj\Debug\Garage.pdb
->>>>>>> upstream/master
+C:\Users\erezl\Desktop\Computer Science\.NET-C#\Garage\Garage\obj\Debug\Ex03.GarageLogic.csprojAssemblyReference.cache
