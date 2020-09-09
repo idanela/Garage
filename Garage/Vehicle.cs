@@ -84,7 +84,7 @@ namespace Ex03.GarageLogic
         }
 
 
-        public abstract bool CheckValidProperties(int i_IndexOFInput, string i_InputsFromUser);
+        public abstract bool CheckAndSetValidProperties(int i_IndexOFInput, string i_InputsFromUser);
 
 
         public override string ToString()

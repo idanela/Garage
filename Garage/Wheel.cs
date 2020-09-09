@@ -1,6 +1,4 @@
 ﻿
-using System;
-
 namespace Ex03.GarageLogic
 {
     public struct Wheel
@@ -71,7 +69,7 @@ namespace Ex03.GarageLogic
         // Methods:
         public void InflateWheel(float i_AirPressure)
         {
-            if (CurrentAirPressure + i_AirPressure < MaxAirPressure)
+            if (CurrentAirPressure + i_AirPressure <= MaxAirPressure)
             {
                 CurrentAirPressure += i_AirPressure;
             }

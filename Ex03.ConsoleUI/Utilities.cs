@@ -8,6 +8,17 @@ namespace Ex03.ConsoleUI
     internal class Utilities
     {
         // Methods:
+        public static void AddNewVehicleToGarage(Garage i_Garage, string i_LicenseNumber)
+        {
+            string ownerName, ownerPhoneNumber;
+
+            Console.WriteLine("To Insert a new car, please fill all the details below:");
+            Vehicle vehicle = Utilities.CreateUserVehicle(i_LicenseNumber);
+            Utilities.GetOwnerDetails(out ownerName, out ownerPhoneNumber);
+            Utilities.GetWheelsManufacturer(vehicle);
+            i_Garage.AddToGarage(vehicle, ownerName, ownerPhoneNumber);
+        }
+
         public static Vehicle CreateUserVehicle(string i_LicenseNumber)
         {
             string model;
@@ -24,13 +35,17 @@ namespace Ex03.ConsoleUI
 
         private static void getVehicleType(out ManufactureVehicle.eVehicleType o_VehicleType)
         {
+            string userInput;
+            
             Console.WriteLine("Please enter the type of your vehicle:");
             ShowEnumTypes(typeof(ManufactureVehicle.eVehicleType));
+            Enum.TryParse(Utilities.GetUserInput(), out o_VehicleType);
 
-            while (!Enum.TryParse(Utilities.GetUserInput(), out o_VehicleType))
+            while (!Enum.IsDefined(typeof(ManufactureVehicle.eVehicleType), o_VehicleType))
             {
                 Console.WriteLine("The only available vehicle types are:");
                 ShowEnumTypes(typeof(ManufactureVehicle.eVehicleType));
+                Enum.TryParse(Utilities.GetUserInput(), out o_VehicleType);
             }
         }
 
@@ -88,13 +103,23 @@ namespace Ex03.ConsoleUI
             {
                 GasEngine.eGasType vehicleGasType = (i_Vehicle.Engine as GasEngine).GasType;
                 Console.WriteLine("You entered wrong gas type. The gas type is {0}. Please try again.", vehicleGasType);
+                ShowEnumTypes(typeof(GasEngine.eGasType));
                 Enum.TryParse(Utilities.GetUserInput(), out io_GasType);
             }
         }
 
         public static bool CheckIfElectricVehicle(Vehicle i_Vehicle)
         {
-            return !CheckIfGasVehicle(i_Vehicle);
+            bool hasElectricVehicle = true;
+
+            if (isGasVehicle(i_Vehicle))
+            {
+                Console.WriteLine("This vehicle doesn't have electric engine.");
+                Thread.Sleep(2000);
+                hasElectricVehicle = false;
+            }
+
+            return hasElectricVehicle;
         }
 
         public static bool CheckIfGasVehicle(Vehicle i_Vehicle)
@@ -148,14 +173,7 @@ namespace Ex03.ConsoleUI
             getValidName(ref o_OwnerName);
             Console.WriteLine("Please enter your phone number:");
             o_OwnerPhoneNumber = Utilities.GetUserInput();
-        }
-
-        public static void GetWheelsManufacturer(Vehicle i_Vehicle)
-        {
-            Console.WriteLine("Please enter the wheel's manufacturer:");
-            string manufacturer = GetUserInput();
-            getValidName(ref manufacturer);
-            i_Vehicle.UpdatManufactererOfWheels(manufacturer);
+            getValidPhoneNumber(ref o_OwnerPhoneNumber);
         }
 
         private static void getValidName(ref string io_OwnerName)
@@ -167,6 +185,40 @@ namespace Ex03.ConsoleUI
             }
         }
 
+        private static void getValidPhoneNumber(ref string io_PhoneNumber)
+        {
+            while (!isAllDigits(io_PhoneNumber))
+            {
+                Console.WriteLine("Phone number can contain only digits.");
+                io_PhoneNumber = GetUserInput();
+            }
+        }
+
+        private static bool isAllDigits(string i_StrToCheck)
+        {
+            bool isAllDigits = true;
+
+            foreach (char character in i_StrToCheck)
+            {
+                if (!Char.IsDigit(character))
+                {
+                    isAllDigits = false;
+                    break;
+                }
+            }
+
+            return isAllDigits;
+        }
+
+        public static void GetWheelsManufacturer(Vehicle i_Vehicle)
+        {
+            Console.WriteLine("Please enter the wheel's manufacturer:");
+            string manufacturer = GetUserInput();
+            getValidName(ref manufacturer);
+            i_Vehicle.UpdatManufactererOfWheels(manufacturer);
+        }
+
+        
         private static bool isAllLetters(string io_StrToCheck)
         {
             bool isAllLetters = true;
@@ -183,11 +235,21 @@ namespace Ex03.ConsoleUI
             return isAllLetters;
         }
 
+        public static void CheckVehicleInGarage(Garage i_Garage, ref string io_LicenseNumber)
+        {
+            while (!i_Garage.IsInGarage(io_LicenseNumber))
+            {
+                Console.WriteLine("This license number {0} does not exist in the system. Please try again", io_LicenseNumber);
+                io_LicenseNumber = Utilities.GetUserInput();
+            }
+        }
+
         public static void GetValidOptionMenu(ref UserInterface.eMenuOption io_MenuOption)
         {
-            while (!Enum.TryParse(GetUserInput(), out io_MenuOption))
+            while (!Enum.IsDefined(typeof(UserInterface.eMenuOption), io_MenuOption))
             {
                 Console.WriteLine("Please enter only number options from 1 to 8.");
+                Enum.TryParse(GetUserInput(), out io_MenuOption);
             }
         }
 
