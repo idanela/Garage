@@ -68,13 +68,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public abstract void UpdateProperties(object i_Obj, object i_SecObj);
-
         public abstract void AddWheels();
         public abstract List<string> GetMessagesAndParams();
 
         public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
         {
+            
             Wheel wheel;
             for (int i = 0; i < this.Wheels.Count; i++)
             {
@@ -84,48 +83,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public abstract bool CheckValidProperties(int i_IndexOFInput, string i_InputsFromUser);
-
-        //public static bool Is<T>(this string input)
-        //{
-        //    try
-        //    {
-        //        TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(input);
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
-
- 
-
-        public void checkekIfValidProperty<T>(T i_Param, string i_Input)
-        {
-            var typeKind = typeof(T);
-            Type ty = typeof(T);
-
-            object[] args = { i_Input, typeKind.MakeByRefType() };
-            Type type = i_Param.GetType();
-            MethodInfo tryParse = type.GetMethod("TryParse");
-            if (tryParse != null)
-            {
-                if (!(bool)tryParse.Invoke(null, args))
-                {
-                    throw new ArgumentException("not a valid formated type");
-                }
-                else
-                {
-                    i_Param = (T)args[1];
-                }
-            }
-            else
-            {
-                throw new ArgumentException("not a valid formated type");
-            }
-        }
+        public abstract bool CheckAndSetValidProperties(int i_IndexOFInput, string i_InputsFromUser);
 
         public override string ToString()
         {

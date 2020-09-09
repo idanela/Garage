@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
     {
         public enum eLicenceType
         {
-            A,
+            A = 1,
             A1,
             B,
             B1
@@ -59,12 +59,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void UpdateProperties(object i_engineVolume, object i_LicenseType)
-        {
-            m_EngineVolume = (int)i_engineVolume;
-            m_LicenceType = (eLicenceType)i_LicenseType;
-        }
-
         public override void AddWheels()
         {
             for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Bike; i++)
@@ -73,7 +67,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override bool CheckValidProperties(int i_IndexOfInput, string i_InputsFromUser)
+        public override bool CheckAndSetValidProperties(int i_IndexOfInput, string i_InputsFromUser)
         {
             bool isValid = false;
 
@@ -113,7 +107,7 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
-
+        
         public override List<string> GetMessagesAndParams()
         {
             List<string> request = new List<string>();
