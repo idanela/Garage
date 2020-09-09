@@ -84,6 +84,8 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public abstract bool CheckValidProperties(int i_IndexOFInput, params string[] i_InputsFromUser);
+
         //public static bool Is<T>(this string input)
         //{
         //    try

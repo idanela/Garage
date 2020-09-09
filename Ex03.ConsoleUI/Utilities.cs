@@ -72,6 +72,8 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(valueOutOfRangeException.Message);
                 i_Vehicle.checkekValidProperty(messageKey, GetUserInput());
             }
+
+           
         }
 
         public static void ShowEnumTypes(Type i_TypeOfEnum)
