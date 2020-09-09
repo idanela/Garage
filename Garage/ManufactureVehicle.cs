@@ -1,12 +1,12 @@
 ﻿
 namespace Ex03.GarageLogic
 {
-    public class ManufectureVehicle
+    public class ManufactureVehicle
     {
         // Enums:
         public enum eVehicleType
         {
-            ElectricBike,
+            ElectricBike = 1,
             Bike,
             ElectricCar,
             Car,

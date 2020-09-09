@@ -20,7 +20,7 @@ namespace Ex03.ConsoleUI
         }
 
         // Enums:
-        private enum eMenuOption
+        internal enum eMenuOption
         {
             InsertNewCar = 1,
             ShowLicenseNumberList,
@@ -49,7 +49,7 @@ namespace Ex03.ConsoleUI
                 showMenuOptions();
                 Console.Write("Your option to choose: ");
                 Enum.TryParse(Utilities.GetUserInput(), out menuOption);
-                // Check valid input.
+                Utilities.GetValidOptionMenu(ref menuOption);
                 menu(menuOption, ref wantToExitProgram);
             }
         }
@@ -105,7 +105,7 @@ namespace Ex03.ConsoleUI
             string ownerName, ownerPhoneNumber;
             string licenseNumber;
 
-            Utilities.EnterLicenseNumber("For add a new car please type first the license number:", out licenseNumber);
+            Utilities.EnterLicenseNumber("To add a new car please type first the license number:", out licenseNumber);
             if (r_Garage.IsGarageEmpty())
             {
                 Console.WriteLine("To Insert a new car, please fill all the details below:");
@@ -126,9 +126,10 @@ namespace Ex03.ConsoleUI
 
         private static void showLicenseNumberList()
         {
+            List<string> licenseNUmbers;
             GarageCard.eStatus statusInGarage;
 
-            try
+            if (Utilities.ChooseToFilter())
             {
                 Console.WriteLine("To show license number of all vehicles, please enter a vehicle's status to filter:");
                 Utilities.ShowEnumTypes(typeof(GarageCard.eStatus));
@@ -137,19 +138,18 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine("The main options to choose from are:");
                     Utilities.ShowEnumTypes(typeof(GarageCard.eStatus));
                 }
-                // Utilities.CheckValidStatusInGarage(ref statusInGarage);
-                List<string> licenseNUmbers = r_Garage.GetListOfSameStatus(statusInGarage);
 
-                Console.WriteLine("The license numbers of the vehicles in the garage are:");
-                foreach (string licenseNUmber in licenseNUmbers)
-                {
-                    Console.WriteLine(licenseNUmber);
-                }
+                licenseNUmbers = r_Garage.GetListOfSameStatus(statusInGarage);
             }
-            catch (ArgumentException argumentException)
+            else
             {
-                // Console.WriteLine(argumentException.Message);
-                throw argumentException;
+                licenseNUmbers = r_Garage.GetListOfSameStatus(null);
+            }
+
+            Console.WriteLine("The license numbers of the vehicles in the garage are:");
+            foreach (string licenseNUmber in licenseNUmbers)
+            {
+                Console.WriteLine(licenseNUmber);
             }
         }
 
@@ -159,14 +159,14 @@ namespace Ex03.ConsoleUI
             GarageCard.eStatus newStatusInGarage;
 
             Utilities.EnterLicenseNumber("To change a vehicle's status, please enter a license number:", out licenseNumber);
-            Console.WriteLine("Please enter a vehicle's new status (unfixed/fix/paid):");
+            Console.WriteLine("Please enter a vehicle's new status:");
+            Utilities.ShowEnumTypes(typeof(GarageCard.eStatus));
             while (!Enum.TryParse(Utilities.GetUserInput(), out newStatusInGarage))
             {
                 Console.WriteLine("You can enter only three types of status:");
                 Utilities.ShowEnumTypes(typeof(GarageCard.eStatus));
             }
             
-            // Utilities.CheckValidStatusInGarage(ref newStatusInGarage);
             r_Garage.changeVehicleStatus(licenseNumber, newStatusInGarage);
         }
 
@@ -180,8 +180,16 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("This license number {0} does not exist in the system. Please try again", licenseNumber);
                 licenseNumber = Utilities.GetUserInput();
             }
+
+            try
+            {
+                r_Garage.InflateWheelsToMax(licenseNumber);
+            }
+            catch (ValueOutOfRangeException valueOutOfRangeException)
+            {
+                Console.WriteLine(valueOutOfRangeException.Message);
+            }
             
-            r_Garage.InflateWheelsToMax(licenseNumber);
         }
 
         private static void fillGas()
@@ -191,33 +199,28 @@ namespace Ex03.ConsoleUI
             GasEngine.eGasType gasType;
 
             Utilities.EnterLicenseNumber("To fill with gas, please enter a license number:", out licenseNumber);
-
             while (!r_Garage.IsInGarage(licenseNumber))
             {
                 Console.WriteLine("This license number {0} does not exist in the system. Please try again", licenseNumber);
                 licenseNumber = Utilities.GetUserInput();
             }
 
-            try
+            if (Utilities.CheckIfGasVehicle(r_Garage[licenseNumber].VehicleToFix))
             {
-                Console.WriteLine("Please enter a amount of gas to fill:");
-                float.TryParse(Utilities.GetUserInput(), out amountOfGasToFill);
-                Console.WriteLine("Please enter the type of gas:");
-                Enum.TryParse(Utilities.GetUserInput(), out gasType);
-                // Check gas type
-                while (!(r_Garage[licenseNumber].VehicleToFix.Engine as GasEngine).ContainSameGasType(gasType))
+                try
                 {
-                    GasEngine.eGasType vehicleGasType =
-                        (r_Garage[licenseNumber].VehicleToFix.Engine as GasEngine).GasType;
-                    Console.WriteLine("You entered wrong gas type. The gas type is {0}. Please try again.", vehicleGasType);
+                    Console.WriteLine("Please enter a amount of gas to fill:");
+                    float.TryParse(Utilities.GetUserInput(), out amountOfGasToFill);
+                    Console.WriteLine("Please enter the type of gas:");
                     Enum.TryParse(Utilities.GetUserInput(), out gasType);
+                    Utilities.GetOriginalGasType(r_Garage[licenseNumber].VehicleToFix, ref gasType);
+                    r_Garage.FillEnergy(licenseNumber, amountOfGasToFill);
                 }
-                r_Garage.FillEnergy(licenseNumber, amountOfGasToFill);
-            }
-            catch (ValueOutOfRangeException valueOutOfRangeException)
-            {
-                Console.WriteLine("The amount of gas is above the maximum. The maximum amount is {0}", valueOutOfRangeException.MaxValue);
-                throw valueOutOfRangeException;
+                catch (ValueOutOfRangeException valueOutOfRangeException)
+                {
+                    Console.WriteLine("The amount of gas is above the maximum. The maximum amount is {0}", valueOutOfRangeException.MaxValue);
+                    throw valueOutOfRangeException;
+                }
             }
         }
 
@@ -233,16 +236,19 @@ namespace Ex03.ConsoleUI
                 licenseNumber = Utilities.GetUserInput();
             }
 
-            try
+            if (!Utilities.CheckIfElectricVehicle(r_Garage[licenseNumber].VehicleToFix))
             {
-                Console.WriteLine("Please enter a amount of charging (in hours):");
-                float.TryParse(Utilities.GetUserInput(), out amountOfCharge);
-                r_Garage.FillEnergy(licenseNumber, amountOfCharge);
-            }
-            catch (ValueOutOfRangeException valueOutOfRangeException)
-            {
-                Console.WriteLine("The amount of hours to charge is above the maximum. The maximum amount is {0}", valueOutOfRangeException.MaxValue);
-                throw valueOutOfRangeException;
+                try
+                {
+                    Console.WriteLine("Please enter a amount of charging (in hours):");
+                    float.TryParse(Utilities.GetUserInput(), out amountOfCharge);
+                    r_Garage.FillEnergy(licenseNumber, amountOfCharge);
+                }
+                catch (ValueOutOfRangeException valueOutOfRangeException)
+                {
+                    Console.WriteLine("The amount of hours to charge is above the maximum. The maximum amount is {0}", valueOutOfRangeException.MaxValue);
+                    throw valueOutOfRangeException;
+                }
             }
         }
 
