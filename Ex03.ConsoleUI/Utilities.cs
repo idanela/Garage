@@ -50,35 +50,35 @@ namespace Ex03.ConsoleUI
 
         public static void UpdateProperties(Vehicle i_Vehicle)
         {
-            Dictionary<string, object> msgProperties = i_Vehicle.GetMessagesAndParams();
-            string messageKey = string.Empty;
+            List<string> msgProperties = i_Vehicle.GetMessagesAndParams();
+            int i = 0;
 
             try
             {
-                foreach (KeyValuePair<string, object> pair in msgProperties)
+                foreach (string message in msgProperties)
                 {
-                    messageKey = pair.Key;
-                    Console.WriteLine(messageKey);
-                    i_Vehicle.checkekValidProperty(pair.Value, GetUserInput());
+                    Console.Write(message);
+                    while (!i_Vehicle.CheckValidProperties(i, GetUserInput()))
+                    {
+                        Console.WriteLine("The input you have inserted is not valid. Please insert again");
+                    }
+
+                    i++;      
                 }
             }
             catch (ArgumentException argumentException)
             {
                 Console.WriteLine(argumentException.Message);
-                i_Vehicle.checkekValidProperty(messageKey, GetUserInput());
             }
             catch (ValueOutOfRangeException valueOutOfRangeException)
             {
                 Console.WriteLine(valueOutOfRangeException.Message);
-                i_Vehicle.checkekValidProperty(messageKey, GetUserInput());
             }
-
-           
         }
 
         public static void ShowEnumTypes(Type i_TypeOfEnum)
         {
-            int i = 1;
+            int i = 0;
             string[] vehicleTypes = Enum.GetNames(i_TypeOfEnum);
 
             foreach (string vehicleType in vehicleTypes)
