@@ -91,12 +91,14 @@ namespace Ex03.GarageLogic
             return isValid;
         }
 
-        public bool SetNumOfDoors(string i_TrunkVoulmeInfo)
+        public bool SetNumOfDoors(string i_NumOfDoors)
         {
             eNumOfDoors numOfDoors;
             bool isValidinput = false;
 
-            isValidinput = Enum.TryParse(i_TrunkVoulmeInfo, out numOfDoors);
+            Enum.TryParse(i_NumOfDoors, out numOfDoors);
+
+            isValidinput = Enum.IsDefined(typeof(eNumOfDoors), numOfDoors);     
             if (isValidinput)
             {
                 m_NumOfDoors = numOfDoors;
@@ -104,12 +106,14 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
-        public bool SetColorOfCar(string i_TrunkVoulmeInfo)
+        public bool SetColorOfCar(string i_ColorOfCar)
         {
             eColorOfCar colorOfCar;
             bool isValidinput = false;
 
-            isValidinput = Enum.TryParse(i_TrunkVoulmeInfo, out colorOfCar);
+            Enum.TryParse(i_ColorOfCar, out colorOfCar);
+
+            isValidinput = Enum.IsDefined(typeof(eNumOfDoors), colorOfCar);
             if (isValidinput)
             {
                 m_ColorOfCar = colorOfCar;
@@ -123,8 +127,18 @@ namespace Ex03.GarageLogic
 
             List<string> request = new List<string>();
 
-            request.Add("Insert number of doors: ");
-            request.Add("Insert color of car: ");
+            request.Add(@"Insert number of doors: 
+1.One
+2.Two
+3.Three
+4.Four"
+);
+            request.Add(@"Insert color of car:
+1.Gray
+2.White
+3.Green
+4.Red
+");
             return request;
         }
         public override string ToString()

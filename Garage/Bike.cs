@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
 {
     public sealed class Bike : Vehicle
     {
-        public enum eLicenceType
+        public enum eLicenseType
         {
             A = 1,
             A1,
@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         }
 
         // Data members
-        private eLicenceType m_LicenceType;
+        private eLicenseType m_LicenceType;
         private int m_EngineVolume;
 
         public Bike(string i_Model, string i_LicenseNumber, Engine i_Engine)
@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
         }
 
         //Properties
-        public eLicenceType LicenceType
+        public eLicenseType LicenceType
         {
             get
             {
@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
             set
             {
 
-                if (!Enum.IsDefined(typeof(eLicenceType), value))
+                if (!Enum.IsDefined(typeof(eLicenseType), value))
                 {
                     throw new ArgumentException("value is not one of the options ");
                 }
@@ -95,11 +95,14 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
-        public bool SetLicenseType(string i_TrunkVoulmeInfo)
+        public bool SetLicenseType(string i_LicenseType)
         {
-            eLicenceType licenseType;
+            eLicenseType licenseType;
             bool isValidinput = false;
-            isValidinput = Enum.TryParse(i_TrunkVoulmeInfo, out licenseType);
+
+            Enum.TryParse(i_LicenseType, out licenseType);
+
+            isValidinput = Enum.IsDefined(typeof(eLicenseType), licenseType);
             if (isValidinput)
             {
                 m_LicenceType = licenseType;
@@ -107,13 +110,18 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
-        
+
         public override List<string> GetMessagesAndParams()
         {
             List<string> request = new List<string>();
 
             request.Add("Insert Engine volume: ");
-            request.Add("Insert licence type: ");
+            request.Add(@"Insert licence type: 
+1.A
+2.A1
+3.B
+4.B1
+");
 
             return request;
         }
