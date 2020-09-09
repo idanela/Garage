@@ -98,13 +98,11 @@ namespace Ex03.GarageLogic
         //    return true;
         //}
 
-        public void checkekValidProperty<T>(T i_Param, string i_Input)
+        public void checkekValidProperty<T>(ref T i_Param, string i_Input)
         {
-            float num = 8;
             T obj = default(T);
             object[] parameters = { i_Input, obj };
-            Type type = num.GetType();
-            //object [] args = { i_Input, obj};
+            Type type = i_Param.GetType();
             MethodInfo tryParse = type.GetMethod("TryParse", new[] { typeof(string), type.MakeByRefType() });
 
             if (tryParse != null)
