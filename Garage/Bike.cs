@@ -73,6 +73,30 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public bool setBikeEngineeVolume(string i_TrunkVoulmeInfo)
+        {
+            int volume;
+            bool isValidinput = false;
+            int.TryParse(i_TrunkVoulmeInfo, out volume);
+            if (isValidinput)
+            {
+                m_EngineVolume = volume;
+            }
+
+            return isValidinput;
+        }
+        public eLicenceType SetLicseneType(string i_TrunkVoulmeInfo)
+        {
+            eLicenceType hasDangerCargo;
+            bool isValidinput = false;
+            float.TryParse(i_TrunkVoulmeInfo, out hasDangerCargo);
+            if (isValidinput)
+            {
+                m_HasDangerCarry = hasDangerCargo;
+            }
+
+            return isValidinput;
+        }
         public override Dictionary<string, object> GetMessagesAndParams()
         {
             Dictionary<string, object> request = new Dictionary<string, object>();
