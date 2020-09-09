@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
             List<string> request = new List<string>();
 
             request.Add("Insert trunk volume: ");
-            request.Add("Is the truck carries dangerous cargo?");
+            request.Add("Is the truck carries dangerous cargo? (Yes / No)");
 
             return request;
         }
@@ -94,17 +94,16 @@ namespace Ex03.GarageLogic
             return isValidinput;
         }
 
-        public bool SetDangerCarry(string i_TrunkVoulmeInfo)
+        public bool SetDangerCarry(string i_HasDangerousCarry)
         {
-            bool hasDangerCargo;
-            bool isValidinput = false;
-            isValidinput = bool.TryParse(i_TrunkVoulmeInfo, out hasDangerCargo);
-            if (isValidinput)
-            {
-                m_HasDangerCarry = hasDangerCargo;
-            }
+            bool isValidInput= i_HasDangerousCarry == "Yes" || i_HasDangerousCarry == "No";
 
-            return isValidinput;
+            if(isValidInput)
+            {
+                m_HasDangerCarry = i_HasDangerousCarry == "yes";
+            }
+            
+            return isValidInput ;
         }
 
         public override string ToString()
