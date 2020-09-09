@@ -9,7 +9,7 @@
         // Enums:
         public enum eEngineType
         {
-            Gas = 0,
+            Gas = 1,
             Electric
         }
 

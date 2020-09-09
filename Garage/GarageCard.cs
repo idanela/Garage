@@ -5,9 +5,9 @@ namespace Ex03.GarageLogic
     {
         public enum eStatus
         {
-            InRepair,
+            InRepair = 1,
             Fixed,
-            paidFor
+            PaidFor
         }
 
         //Data members
