@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
     {
         public enum eColorOfCar
         {
-            Gray,
+            Gray = 1,
             White,
             Green,
             Red
@@ -67,12 +67,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void UpdateProperties(object i_ColorOfCar, object i_NumOfDoors)
-        {
-            m_ColorOfCar = (eColorOfCar)i_ColorOfCar;
-            m_NumOfDoors = (eNumOfDoors)i_NumOfDoors;
-        }
-
         public override void AddWheels()
         {
             for (int i = 0; i < (int)Wheel.eWheelsPerVehicle.Car; i++)
@@ -81,7 +75,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override bool CheckValidProperties(int i_IndexOfInput,  string i_InputsFromUser)
+        public override bool CheckAndSetValidProperties(int i_IndexOfInput,  string i_InputsFromUser)
         {
             bool isValid = false;
 
@@ -101,6 +95,7 @@ namespace Ex03.GarageLogic
         {
             eNumOfDoors numOfDoors;
             bool isValidinput = false;
+
             isValidinput = Enum.TryParse(i_TrunkVoulmeInfo, out numOfDoors);
             if (isValidinput)
             {
@@ -113,6 +108,7 @@ namespace Ex03.GarageLogic
         {
             eColorOfCar colorOfCar;
             bool isValidinput = false;
+
             isValidinput = Enum.TryParse(i_TrunkVoulmeInfo, out colorOfCar);
             if (isValidinput)
             {

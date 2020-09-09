@@ -44,7 +44,7 @@ namespace Ex03.ConsoleUI
                 foreach (string message in msgProperties)
                 {
                     Console.Write(message);
-                    while (!i_Vehicle.CheckValidProperties(i, GetUserInput()))
+                    while (!i_Vehicle.CheckAndSetValidProperties(i, GetUserInput()))
                     {
                         Console.WriteLine("The input you have inserted is not valid. Please insert again");
                     }

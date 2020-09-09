@@ -68,13 +68,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public abstract void UpdateProperties(object i_Obj, object i_SecObj);
-
         public abstract void AddWheels();
         public abstract List<string> GetMessagesAndParams();
 
         public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
         {
+            
             Wheel wheel;
             for (int i = 0; i < this.Wheels.Count; i++)
             {
@@ -84,7 +83,9 @@ namespace Ex03.GarageLogic
             }
         }
 
+
         public abstract bool CheckValidProperties(int i_IndexOFInput, string i_InputsFromUser);
+
 
         public override string ToString()
         {

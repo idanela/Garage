@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 namespace Ex03.GarageLogic
 {
     public sealed class GarageCard
@@ -58,6 +58,11 @@ namespace Ex03.GarageLogic
 
             set
             {
+                if (!Enum.IsDefined(typeof(eStatus), value))
+                {
+                    throw new ArgumentException("value is not one of the options ");
+                }
+
                 m_StatusInGarage = value;
             }
         }

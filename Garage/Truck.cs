@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+
 namespace Ex03.GarageLogic
 {
     public sealed class Truck : Vehicle
@@ -38,16 +40,10 @@ namespace Ex03.GarageLogic
             {
                 if (value <= 0)
                 {
-                    throw new ValueOutOfRangeException(1, 1000);
+                    throw new ArgumentException ("Trunk volume can not be negative or zero.");
                 }
                 m_TrunkVolume = value;
             }
-        }
-
-        public override void UpdateProperties(object i_HasDangerousCarry, object i_CargoVolume)
-        {
-            m_HasDangerCarry = (bool)i_HasDangerousCarry;
-            m_TrunkVolume = (float)i_CargoVolume;
         }
 
         public override void AddWheels()
@@ -69,7 +65,7 @@ namespace Ex03.GarageLogic
             return request;
         }
 
-        public override bool CheckValidProperties(int i_IndexOfInput, string i_InputsFromUser)
+        public override bool CheckAndSetValidProperties(int i_IndexOfInput, string i_InputsFromUser)
         {
             bool isValid = false;
 
@@ -97,6 +93,7 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
+
         public bool SetDangerCarry(string i_TrunkVoulmeInfo)
         {
             bool hasDangerCargo;
@@ -109,6 +106,7 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
+
         public override string ToString()
         {
             string printhasHazardosCargo = m_HasDangerCarry ? "Yes" : "No";
