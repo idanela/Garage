@@ -73,11 +73,27 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override bool CheckValidProperties(int i_IndexOfInput, string i_InputsFromUser)
+        {
+            bool isValid = false;
+
+            if (i_IndexOfInput == 0)
+            {
+                isValid = setBikeEngineeVolume(i_InputsFromUser);
+            }
+            else
+            {
+                isValid = SetLicenseType(i_InputsFromUser);
+            }
+
+            return isValid;
+        }
+     
         public bool setBikeEngineeVolume(string i_TrunkVoulmeInfo)
         {
             int volume;
             bool isValidinput = false;
-            int.TryParse(i_TrunkVoulmeInfo, out volume);
+            isValidinput = int.TryParse(i_TrunkVoulmeInfo, out volume);
             if (isValidinput)
             {
                 m_EngineVolume = volume;
@@ -85,24 +101,26 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
-        public eLicenceType SetLicseneType(string i_TrunkVoulmeInfo)
+        public bool SetLicenseType(string i_TrunkVoulmeInfo)
         {
-            eLicenceType hasDangerCargo;
+            eLicenceType licenseType;
             bool isValidinput = false;
-            float.TryParse(i_TrunkVoulmeInfo, out hasDangerCargo);
+            isValidinput = Enum.TryParse(i_TrunkVoulmeInfo, out licenseType);
             if (isValidinput)
             {
-                m_HasDangerCarry = hasDangerCargo;
+                m_LicenceType = licenseType;
             }
 
             return isValidinput;
         }
-        public override Dictionary<string, object> GetMessagesAndParams()
-        {
-            Dictionary<string, object> request = new Dictionary<string, object>();
 
-            request.Add("Insert Engine volume: ", m_EngineVolume);
-            request.Add("Insert licence type: ", m_LicenceType);
+        public override List<string> GetMessagesAndParams()
+        {
+            List<string> request = new List<string>();
+
+            request.Add("Insert Engine volume: ");
+            request.Add("Insert licence type: ");
+
             return request;
         }
         public override string ToString()

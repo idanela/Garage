@@ -81,13 +81,54 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override Dictionary<string, object> GetMessagesAndParams()
+        public override bool CheckValidProperties(int i_IndexOfInput,  string i_InputsFromUser)
+        {
+            bool isValid = false;
+
+            if (i_IndexOfInput == 0)
+            {
+                isValid = SetNumOfDoors(i_InputsFromUser);
+            }
+            else
+            {
+                isValid = SetColorOfCar(i_InputsFromUser);
+            }
+
+            return isValid;
+        }
+
+        public bool SetNumOfDoors(string i_TrunkVoulmeInfo)
+        {
+            eNumOfDoors numOfDoors;
+            bool isValidinput = false;
+            isValidinput = Enum.TryParse(i_TrunkVoulmeInfo, out numOfDoors);
+            if (isValidinput)
+            {
+                m_NumOfDoors = numOfDoors;
+            }
+
+            return isValidinput;
+        }
+        public bool SetColorOfCar(string i_TrunkVoulmeInfo)
+        {
+            eColorOfCar colorOfCar;
+            bool isValidinput = false;
+            isValidinput = Enum.TryParse(i_TrunkVoulmeInfo, out colorOfCar);
+            if (isValidinput)
+            {
+                m_ColorOfCar = colorOfCar;
+            }
+
+            return isValidinput;
+        }
+
+        public override List<string> GetMessagesAndParams()
         {
 
-            Dictionary<string, object> request = new Dictionary<string, object>();
+            List<string> request = new List<string>();
 
-            request.Add("Insert number of doors: ",  m_NumOfDoors);
-            request.Add("Insert color of car: ",  m_ColorOfCar);
+            request.Add("Insert number of doors: ");
+            request.Add("Insert color of car: ");
             return request;
         }
         public override string ToString()
