@@ -83,15 +83,17 @@ namespace Ex03.GarageLogic
             return isValid;
         }
      
-        public bool setBikeEngineeVolume(string i_TrunkVoulmeInfo)
+        public bool setBikeEngineeVolume(string i_EngineVolume)
         {
             int volume;
             bool isValidinput = false;
-            isValidinput = int.TryParse(i_TrunkVoulmeInfo, out volume);
-            if (isValidinput)
+            isValidinput = int.TryParse(i_EngineVolume, out volume);
+            if (!isValidinput)
             {
-                m_EngineVolume = volume;
+                throw new FormatException(string.Format("{0} is not parsable to integer",i_EngineVolume));
             }
+
+            m_EngineVolume = volume;
 
             return isValidinput;
         }
@@ -100,7 +102,10 @@ namespace Ex03.GarageLogic
             eLicenseType licenseType;
             bool isValidinput = false;
 
-            Enum.TryParse(i_LicenseType, out licenseType);
+            if(!Enum.TryParse(i_LicenseType, out licenseType))
+            {
+                throw new FormatException("Not parsable to licsenes type");
+            }
 
             isValidinput = Enum.IsDefined(typeof(eLicenseType), licenseType);
             if (isValidinput)
