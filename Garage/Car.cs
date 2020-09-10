@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
             {
                 if (!Enum.IsDefined(typeof(eColorOfCar), value))
                 {
-                    throw new ArgumentException("value is not one of the options ");
+                    throw new ArgumentException("Not one of the colors in set");
                 }
 
                 m_ColorOfCar = value;
@@ -96,7 +96,10 @@ namespace Ex03.GarageLogic
             eNumOfDoors numOfDoors;
             bool isValidinput = false;
 
-            Enum.TryParse(i_NumOfDoors, out numOfDoors);
+            if(!Enum.TryParse(i_NumOfDoors, out numOfDoors))
+            {
+                throw new FormatException(string.Format("{0} is not parsable to number of doors", numOfDoors));
+            }
 
             isValidinput = Enum.IsDefined(typeof(eNumOfDoors), numOfDoors);     
             if (isValidinput)
@@ -111,7 +114,10 @@ namespace Ex03.GarageLogic
             eColorOfCar colorOfCar;
             bool isValidinput = false;
 
-            Enum.TryParse(i_ColorOfCar, out colorOfCar);
+            if(Enum.TryParse(i_ColorOfCar, out colorOfCar))
+            {
+                throw new FormatException(string.Format("{0} is not parsable to color of car.",i_ColorOfCar));
+            }
 
             isValidinput = Enum.IsDefined(typeof(eNumOfDoors), colorOfCar);
             if (isValidinput)

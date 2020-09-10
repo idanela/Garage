@@ -86,10 +86,12 @@ namespace Ex03.GarageLogic
             float volume;
             bool isValidinput = false;
             isValidinput = float.TryParse(i_TrunkVoulmeInfo, out volume);
-            if(isValidinput)
+            if(!isValidinput)
             {
-                m_TrunkVolume = volume;
+                throw new FormatException(string.Format("{0} is not parsable to float", i_TrunkVoulmeInfo));
             }
+
+            m_TrunkVolume = volume;
 
             return isValidinput;
         }
