@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         }
 
         // Data members
-        private eLicenseType m_LicenceType;
+        private eLicenseType m_LicenseType;
         private int m_EngineVolume;
 
         public Bike(string i_Model, string i_LicenseNumber, Engine i_Engine)
@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_LicenceType;
+                return m_LicenseType;
             }
             set
             {
@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
                     throw new ArgumentException("value is not one of the options ");
                 }
 
-                m_LicenceType = value;
+                m_LicenseType = value;
             }
         }
 
@@ -77,16 +77,17 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                isValid = SetLicenseType(i_InputsFromUser);
+                isValid = setLicenseType(i_InputsFromUser);
             }
 
             return isValid;
         }
      
-        public bool setBikeEngineeVolume(string i_EngineVolume)
+        private bool setBikeEngineeVolume(string i_EngineVolume)
         {
             int volume;
             bool isValidinput = false;
+
             isValidinput = int.TryParse(i_EngineVolume, out volume);
             if (!isValidinput)
             {
@@ -97,7 +98,7 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
-        public bool SetLicenseType(string i_LicenseType)
+        private bool setLicenseType(string i_LicenseType)
         {
             eLicenseType licenseType;
             bool isValidinput = false;
@@ -110,7 +111,7 @@ namespace Ex03.GarageLogic
             isValidinput = Enum.IsDefined(typeof(eLicenseType), licenseType);
             if (isValidinput)
             {
-                m_LicenceType = licenseType;
+                m_LicenseType = licenseType;
             }
 
             return isValidinput;
@@ -136,7 +137,7 @@ namespace Ex03.GarageLogic
 EngineVolume: {0}
 License kind: {1}
 ",
-m_EngineVolume,m_LicenceType);
+m_EngineVolume,m_LicenseType);
         }
     }
 }
