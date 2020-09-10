@@ -109,12 +109,13 @@ namespace Ex03.GarageLogic
 
             return isValidinput;
         }
+
         public bool SetColorOfCar(string i_ColorOfCar)
         {
             eColorOfCar colorOfCar;
             bool isValidinput = false;
 
-            if(Enum.TryParse(i_ColorOfCar, out colorOfCar))
+            if(!Enum.TryParse(i_ColorOfCar, out colorOfCar))
             {
                 throw new FormatException(string.Format("{0} is not parsable to color of car.",i_ColorOfCar));
             }
@@ -137,7 +138,8 @@ namespace Ex03.GarageLogic
 1.One
 2.Two
 3.Three
-4.Four"
+4.Four
+"
 );
             request.Add(@"Insert color of car:
 1.Gray
