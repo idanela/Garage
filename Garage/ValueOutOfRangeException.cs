@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
 
         // Constructor:
         public ValueOutOfRangeException(float i_MinValue, float i_MaxValue) :
-            base(string.Format("An error occured while trying insert value. Minimum is {0}, and maximum is {1}", i_MinValue , i_MaxValue))
+            base(string.Format("The value that was given is out of range. Minimum is {0}, and maximum is {1}", i_MinValue , i_MaxValue))
         {
             r_MaxValue = i_MaxValue;
             r_MinValue = i_MinValue;
