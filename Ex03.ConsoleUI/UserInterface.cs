@@ -10,19 +10,10 @@ namespace Ex03.ConsoleUI
         // Data Memebers:
         private static readonly Garage r_Garage = new Garage();
 
-        // Properties:
-        public Garage Garage
-        {
-            get
-            {
-                return r_Garage;
-            }
-        }
-
         // Enums:
         internal enum eMenuOption
         {
-            InsertNewCar = 1,
+            InsertNewVehicle = 1,
             ShowLicenseNumberList,
             ChangeVehicleStatus,
             InflateWheel,
@@ -30,6 +21,15 @@ namespace Ex03.ConsoleUI
             ChargeElectricEngine,
             ShowVehicleDetails,
             Exit
+        }
+
+        // Properties:
+        public Garage Garage
+        {
+            get
+            {
+                return r_Garage;
+            }
         }
 
         // Methods:
@@ -50,7 +50,7 @@ namespace Ex03.ConsoleUI
                 Console.Write("Your option to choose: ");
                 Enum.TryParse(Utilities.GetUserInput(), out menuOption);
                 Utilities.GetValidOptionMenu(ref menuOption);
-                if (r_Garage.IsGarageEmpty() && menuOption != eMenuOption.InsertNewCar && menuOption != eMenuOption.Exit)
+                if (r_Garage.IsGarageEmpty() && menuOption != eMenuOption.InsertNewVehicle && menuOption != eMenuOption.Exit)
                 {
                     Console.WriteLine("The garage is currently empty. Please insert a vehicle to choose that option.");
                 }
@@ -65,8 +65,8 @@ namespace Ex03.ConsoleUI
         {
             switch (i_OptionFromMenu)
             {
-                case eMenuOption.InsertNewCar:
-                    insertNewCar();
+                case eMenuOption.InsertNewVehicle:
+                    insertNewVehicle();
                     break;
                 case eMenuOption.ShowLicenseNumberList:
                     showLicenseNumberList();
@@ -107,11 +107,11 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(menuOptions);
         }
 
-        private static void insertNewCar()
+        private static void insertNewVehicle()
         {
             string licenseNumber;
 
-            Utilities.EnterLicenseNumber("To add a new car please type first the license number:", out licenseNumber);
+            Utilities.EnterLicenseNumber("To add a new vehicle please type first the license number:", out licenseNumber);
             if (r_Garage.IsGarageEmpty())
             {
                 Utilities.AddNewVehicleToGarage(r_Garage, licenseNumber);
@@ -132,7 +132,6 @@ namespace Ex03.ConsoleUI
 
         private static void showLicenseNumberList()
         {
-            string userInput;
             List<string> licenseNUmbers;
             GarageCard.eStatus statusInGarage;
 
@@ -158,7 +157,7 @@ namespace Ex03.ConsoleUI
 
             if (licenseNUmbers.Count == 0)
             {
-                Console.WriteLine("Currently, there are no vehicles with this status. Please try again.");
+                Console.WriteLine("Currently, there are no vehicles with this status.");
             }
             else
             {
@@ -209,8 +208,7 @@ namespace Ex03.ConsoleUI
             catch (ValueOutOfRangeException valueOutOfRangeException)
             {
                 Console.WriteLine(valueOutOfRangeException.Message);
-            }
-            
+            }        
         }
 
         private static void fillGas()
@@ -228,7 +226,11 @@ namespace Ex03.ConsoleUI
                 try
                 {
                     Console.WriteLine("Please enter a amount of gas to fill:");
-                    float.TryParse(Utilities.GetUserInput(), out amountOfGasToFill);
+                    while (!float.TryParse(Utilities.GetUserInput(), out amountOfGasToFill))
+                    {
+                        Console.WriteLine("The amount to fill should be a number. Try again");
+                    }
+
                     Console.WriteLine("Please enter the type of gas:");
                     Utilities.ShowEnumTypes(typeof(GasEngine.eGasType));
                     Enum.TryParse(Utilities.GetUserInput(), out gasType);
@@ -238,6 +240,7 @@ namespace Ex03.ConsoleUI
                         Utilities.ShowEnumTypes(typeof(GasEngine.eGasType));
                         Enum.TryParse(Utilities.GetUserInput(), out gasType);
                     }
+
                     Utilities.GetOriginalGasType(r_Garage[licenseNumber].VehicleToFix, ref gasType);
                     r_Garage.FillEnergy(licenseNumber, amountOfGasToFill);
                 }
@@ -245,7 +248,6 @@ namespace Ex03.ConsoleUI
                 {
                     leftToFill = valueOutOfRangeException.MaxValue - currentAmountOfFill;
                     Console.WriteLine("The amount of gas is above the maximum. The amount of gas that left to fill is {0}", leftToFill);
-                    throw valueOutOfRangeException;
                 }
             }
         }
@@ -264,7 +266,11 @@ namespace Ex03.ConsoleUI
                 try
                 {
                     Console.WriteLine("Please enter a amount of charging (in hours):");
-                    float.TryParse(Utilities.GetUserInput(), out amountOfCharge);
+                    while (float.TryParse(Utilities.GetUserInput(), out amountOfCharge))
+                    {
+                        Console.WriteLine("The number to hours to fill should be a number. Try again");
+                    }
+
                     r_Garage.FillEnergy(licenseNumber, amountOfCharge);
                 }
                 catch (ValueOutOfRangeException valueOutOfRangeException)

@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
             Four
         }
 
-        //Data members
+        // Data members
         private eNumOfDoors m_NumOfDoors;
         private eColorOfCar m_ColorOfCar;
 
@@ -31,7 +31,7 @@ namespace Ex03.GarageLogic
             AddWheels();
         }
 
-        //Properties
+        // Properties
         public eNumOfDoors NumOfDoors
         {
             get
@@ -56,6 +56,7 @@ namespace Ex03.GarageLogic
             {
                 return m_ColorOfCar;
             }
+
             set
             {
                 if (!Enum.IsDefined(typeof(eColorOfCar), value))
@@ -96,15 +97,15 @@ namespace Ex03.GarageLogic
             eNumOfDoors numOfDoors;
             bool isValidinput = false;
 
-            if(!Enum.TryParse(i_NumOfDoors, out numOfDoors))
+            if (!Enum.TryParse(i_NumOfDoors, out numOfDoors))
             {
-                throw new FormatException(string.Format("{0} is not parsable to number of doors", numOfDoors));
+                throw new FormatException("Not a valid input for numbers of door.");
             }
 
             isValidinput = Enum.IsDefined(typeof(eNumOfDoors), numOfDoors);     
             if (isValidinput)
             {
-                m_NumOfDoors = numOfDoors;
+                NumOfDoors = numOfDoors;
             }
 
             return isValidinput;
@@ -117,21 +118,20 @@ namespace Ex03.GarageLogic
 
             if(!Enum.TryParse(i_ColorOfCar, out colorOfCar))
             {
-                throw new FormatException(string.Format("{0} is not parsable to color of car.",i_ColorOfCar));
+                throw new FormatException(string.Format("Not a valid input for color of car."));
             }
 
-            isValidinput = Enum.IsDefined(typeof(eNumOfDoors), colorOfCar);
+            isValidinput = Enum.IsDefined(typeof(eColorOfCar), colorOfCar);
             if (isValidinput)
             {
-                m_ColorOfCar = colorOfCar;
+                ColorOfCar = colorOfCar;
             }
 
             return isValidinput;
         }
 
-        public override List<string> GetMessagesAndParams()
+        public override List<string> GetMessagesAboutParams()
         {
-
             List<string> request = new List<string>();
 
             request.Add(@"Insert number of doors: 
@@ -139,8 +139,8 @@ namespace Ex03.GarageLogic
 2.Two
 3.Three
 4.Four
-"
-);
+");
+
             request.Add(@"Insert color of car:
 1.Gray
 2.White
@@ -149,15 +149,16 @@ namespace Ex03.GarageLogic
 ");
             return request;
         }
+
         public override string ToString()
         {
-            return base.ToString() + string.Format(@"
+            return base.ToString() + string.Format(
+                @"
 Number of doors: {0}
 color of car: {1}
 ",
-           m_NumOfDoors, m_ColorOfCar);
+m_NumOfDoors,
+m_ColorOfCar);
         }
     }
 }
-
-

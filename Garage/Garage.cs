@@ -21,6 +21,7 @@ namespace Ex03.GarageLogic
                 return r_Vehicles;
             }
         }
+
         public bool IsGarageEmpty()
         {
             return r_Vehicles.Count == 0;
@@ -31,12 +32,12 @@ namespace Ex03.GarageLogic
             return r_Vehicles.ContainsKey(i_LicenseNumber);
         }
 
-        public void AddToGarage(Vehicle i_Vehicle, string i_OwnersName,string i_PhoneNumber)
+        public void AddToGarage(Vehicle i_Vehicle, string i_OwnersName, string i_PhoneNumber)
         {
             r_Vehicles.Add(i_Vehicle.LicenseNumber, new GarageCard(i_OwnersName, i_PhoneNumber, i_Vehicle));          
         }
 
-        public List <string> GetListOfSameStatus(GarageCard.eStatus? i_Staus)
+        public List<string> GetListOfSameStatus(GarageCard.eStatus? i_Staus)
         {
             List<string> filteredLicsenceNumbers = new List<string>();
 
@@ -77,7 +78,7 @@ namespace Ex03.GarageLogic
         {
             GarageCard card;
 
-           if( r_Vehicles.TryGetValue(i_LicenseNumber, out card))
+           if (r_Vehicles.TryGetValue(i_LicenseNumber, out card))
             {
                 card.Status = i_NewStatus;
             }
@@ -91,7 +92,7 @@ namespace Ex03.GarageLogic
             {
                 Wheel wheel;
 
-                for (int i = 0; i<card.VehicleToFix.Wheels.Count; i++)
+                for (int i = 0; i < card.VehicleToFix.Wheels.Count; i++)
                 {
                     wheel = card.VehicleToFix.Wheels[i];
                     wheel.InflateWheel(card.VehicleToFix.Wheels[i].MaxAirPressure);
@@ -100,7 +101,7 @@ namespace Ex03.GarageLogic
             }     
         }
 
-        public void FillEnergy(string i_LicenseNumber,float i_AmountToFill)
+        public void FillEnergy(string i_LicenseNumber, float i_AmountToFill)
         {
             GarageCard card;
 
@@ -110,7 +111,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        //Indexers:
+        // Indexers:
         public GarageCard this[string i_LicenseNumber]
         {
             get

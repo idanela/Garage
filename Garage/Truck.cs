@@ -5,42 +5,42 @@ namespace Ex03.GarageLogic
 {
     public sealed class Truck : Vehicle
     {
-        //Data Members
+        // Data Members
         private bool m_HasDangerCarry;
         private float m_TrunkVolume;
 
         public Truck(string i_Model, string i_LicenseNumber, Engine i_Engine)
             : base(i_Model, i_LicenseNumber, i_Engine)
         {
-            AddWheels();
+            this.AddWheels();
         }
 
-        //Properties
+        // Properties
         public bool HasDangerCarry
         {
             get
             {
-                return m_HasDangerCarry;
+                return this.m_HasDangerCarry;
             }
 
             set
             {
-                m_HasDangerCarry = value;
+                this.m_HasDangerCarry = value;
             }
         }
 
-        public float CargoVolume
+        public float TrunkVolume
         {
             get
             {
-                return m_TrunkVolume;
+                return this.m_TrunkVolume;
             }
 
             set
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException ("Trunk volume can not be negative or zero.");
+                    new ArgumentException("Trunk volume can not be negative or zero.");
                 }
 
                 m_TrunkVolume = value;
@@ -55,8 +55,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-
-        public override List<string> GetMessagesAndParams()
+        public override List<string> GetMessagesAboutParams()
         {
             List<string> request = new List<string>();
 
@@ -88,36 +87,38 @@ namespace Ex03.GarageLogic
             bool isValidinput = false;
 
             isValidinput = float.TryParse(i_TrunkVoulmeInfo, out volume);
-            if(!isValidinput)
+            if (!isValidinput)
             {
-                throw new FormatException(string.Format("{0} is not parsable to float", i_TrunkVoulmeInfo));
+                throw new FormatException("Not a valid input for trunk volume.");
             }
 
-            m_TrunkVolume = volume;
+            TrunkVolume = volume;
 
             return isValidinput;
         }
 
         private bool setDangerCarry(string i_HasDangerousCarry)
         {
-            bool isValidInput= i_HasDangerousCarry == "Yes" || i_HasDangerousCarry == "No";
+            bool isValidInput = i_HasDangerousCarry == "Yes" || i_HasDangerousCarry == "No";
 
-            if(isValidInput)
+            if (isValidInput)
             {
-                m_HasDangerCarry = i_HasDangerousCarry == "yes";
+                HasDangerCarry = i_HasDangerousCarry == "yes";
             }
             
-            return isValidInput ;
+            return isValidInput;
         }
 
         public override string ToString()
         {
             string printhasHazardousCargo = m_HasDangerCarry ? "Yes" : "No";
-            return base.ToString() + string.Format(@"
+            return base.ToString() + string.Format(
+                @"
 Does it carry Dangerous cargo? {0}
 Cargo volume is: {1}
 ",
-           printhasHazardousCargo, m_TrunkVolume); 
+           printhasHazardousCargo, 
+           m_TrunkVolume); 
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Ex03.GarageLogic
 {
     public sealed class GarageCard
@@ -10,11 +11,11 @@ namespace Ex03.GarageLogic
             PaidFor
         }
 
-        //Data members
-        private Vehicle m_VehicleToFix;
+        // Data members
         private readonly string r_OwnersName;
         private readonly string r_PhoneNumber;
-        private  eStatus m_StatusInGarage;
+        private Vehicle m_VehicleToFix;     
+        private eStatus m_StatusInGarage;
 
         public GarageCard(string i_OwnersName, string i_PhoneNumber, Vehicle i_CarToFix)
         {
@@ -22,10 +23,9 @@ namespace Ex03.GarageLogic
             r_PhoneNumber = i_PhoneNumber;
             m_VehicleToFix = i_CarToFix;
             m_StatusInGarage = eStatus.InRepair; 
-
         }
 
-        //Properties
+        // Properties
         public string OwnersName
         {
             get
@@ -33,6 +33,7 @@ namespace Ex03.GarageLogic
                 return r_OwnersName;
             }
         }
+
         public string PhoneNumber
         {
             get
@@ -69,13 +70,16 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(@"
+            return string.Format(
+                @"
 Owners name: {0}
 Phone number: {1}
 Vehicle status:{2}
 Vehicle detail:
-", OwnersName, PhoneNumber, Status) + VehicleToFix.ToString();
+",
+OwnersName,
+PhoneNumber,
+Status) + VehicleToFix.ToString();
         }
-
     }
 }

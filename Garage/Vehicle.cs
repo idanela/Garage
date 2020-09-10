@@ -39,7 +39,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        virtual public float PrecentageOfEnergyLeft
+        public float PrecentageOfEnergyLeft
         {
             get
             {
@@ -69,11 +69,11 @@ namespace Ex03.GarageLogic
         }
 
         public abstract void AddWheels();
-        public abstract List<string> GetMessagesAndParams();
+
+        public abstract List<string> GetMessagesAboutParams();
 
         public void UpdatManufactererOfWheels(string i_NameOfManufacterer)
         {
-            
             Wheel wheel;
             for (int i = 0; i < this.Wheels.Count; i++)
             {
@@ -83,19 +83,17 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         public abstract bool CheckAndSetValidProperties(int i_IndexOFInput, string i_InputsFromUser);
-
 
         public override string ToString()
         {
-            return string.Format(@"
+            return string.Format(
+                @"
 Model:{0}
 license number:{1}
-Wheels:", r_Model, r_LisenceNumber) + m_Wheels[0].ToString() + m_Engine.ToString();
+Wheels:",
+r_Model,
+r_LisenceNumber) + m_Wheels[0].ToString() + m_Engine.ToString();
         }
     }
 }
-
-
-
