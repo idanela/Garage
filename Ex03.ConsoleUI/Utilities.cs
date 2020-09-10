@@ -5,7 +5,7 @@ using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    internal class Utilities
+    internal struct Utilities
     {
         // Methods:
         public static void AddNewVehicleToGarage(Garage i_Garage, string i_LicenseNumber)
@@ -74,6 +74,10 @@ namespace Ex03.ConsoleUI
             catch (ValueOutOfRangeException valueOutOfRangeException)
             {
                 Console.WriteLine(valueOutOfRangeException.Message);
+            }
+            catch (FormatException formatException)
+            {
+                Console.WriteLine(formatException.Message);
             }
         }
 
@@ -219,11 +223,11 @@ namespace Ex03.ConsoleUI
         }
 
         
-        private static bool isAllLetters(string io_StrToCheck)
+        private static bool isAllLetters(string i_StrToCheck)
         {
             bool isAllLetters = true;
 
-            foreach (char character in io_StrToCheck)
+            foreach (char character in i_StrToCheck)
             {
                 if (!Char.IsLetter(character))
                 {

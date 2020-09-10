@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
     public struct Wheel
     {
         // Data Members:
-        private string r_ManufacturerName;
+        private string m_ManufacturerName;
         private float m_CurrentAirPressure;
         private readonly float r_MaxAirPressure;
 
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
         // Constructors:
         public Wheel(float i_MaxAirPressure)
         {
-            r_ManufacturerName = null;
+            m_ManufacturerName = null;
             m_CurrentAirPressure = 0;
             r_MaxAirPressure = i_MaxAirPressure;
         }
@@ -36,11 +36,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_ManufacturerName;
+                return m_ManufacturerName;
             }
             set
             {
-                r_ManufacturerName = value;
+                m_ManufacturerName = value;
             }
         }
 

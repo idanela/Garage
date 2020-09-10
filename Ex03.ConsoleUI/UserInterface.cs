@@ -5,7 +5,7 @@ using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    internal class UserInterface
+    internal struct UserInterface
     {
         // Data Memebers:
         private static readonly Garage r_Garage = new Garage();
