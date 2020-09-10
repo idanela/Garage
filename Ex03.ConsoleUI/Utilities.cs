@@ -12,7 +12,7 @@ namespace Ex03.ConsoleUI
         {
             string ownerName, ownerPhoneNumber;
 
-            Console.WriteLine("To Insert a new car, please fill all the details below:");
+            Console.WriteLine("To Insert a new vehicle, please fill all the details below:");
             Vehicle vehicle = Utilities.CreateUserVehicle(i_LicenseNumber);
             Utilities.GetOwnerDetails(out ownerName, out ownerPhoneNumber);
             Utilities.GetWheelsManufacturer(vehicle);
@@ -34,9 +34,7 @@ namespace Ex03.ConsoleUI
         }
 
         private static void getVehicleType(out ManufactureVehicle.eVehicleType o_VehicleType)
-        {
-            string userInput;
-            
+        {            
             Console.WriteLine("Please enter the type of your vehicle:");
             ShowEnumTypes(typeof(ManufactureVehicle.eVehicleType));
             Enum.TryParse(Utilities.GetUserInput(), out o_VehicleType);
@@ -51,34 +49,34 @@ namespace Ex03.ConsoleUI
 
         public static void UpdateProperties(Vehicle i_Vehicle)
         {
-            int i = 0;
-            List<string> msgProperties = i_Vehicle.GetMessagesAndParams();
+            List<string> msgProperties = i_Vehicle.GetMessagesAboutParams();
 
-            try
+            for (int i = 0; i < msgProperties.Count; i++)
             {
-                foreach (string message in msgProperties)
+                Console.Write(msgProperties[i]);
+                try
                 {
-                    Console.Write(message);
                     while (!i_Vehicle.CheckAndSetValidProperties(i, GetUserInput()))
                     {
                         Console.WriteLine("The input you have inserted is not valid. Please insert again");
                     }
-
-                    i++;      
                 }
-            }
-            catch (ArgumentException argumentException)
-            {
-                Console.WriteLine(argumentException.Message);
-            }
-            catch (ValueOutOfRangeException valueOutOfRangeException)
-            {
-                Console.WriteLine(valueOutOfRangeException.Message);
-            }
-            catch (FormatException formatException)
-            {
-                Console.WriteLine(formatException.Message);
-            }
+                catch (ArgumentException argumentException)
+                {
+                    Console.WriteLine(argumentException.Message);
+                    i--;
+                }
+                catch (ValueOutOfRangeException valueOutOfRangeException)
+                {
+                    Console.WriteLine(valueOutOfRangeException.Message);
+                    i--;
+                }
+                catch (FormatException formatException)
+                {
+                    Console.WriteLine(formatException.Message);
+                    i--;
+                }     
+            }             
         }
 
         public static bool ChooseToFilter()
@@ -160,7 +158,7 @@ namespace Ex03.ConsoleUI
 
             foreach (char character in i_StrToCheck)
             {
-                if (!Char.IsLetterOrDigit(character))
+                if (!char.IsLetterOrDigit(character))
                 {
                     isAllLettersAndNumbers = false;
                     break;
@@ -204,7 +202,7 @@ namespace Ex03.ConsoleUI
 
             foreach (char character in i_StrToCheck)
             {
-                if (!Char.IsDigit(character))
+                if (!char.IsDigit(character))
                 {
                     isAllDigits = false;
                     break;
@@ -222,14 +220,13 @@ namespace Ex03.ConsoleUI
             i_Vehicle.UpdatManufactererOfWheels(manufacturer);
         }
 
-        
         private static bool isAllLetters(string i_StrToCheck)
         {
             bool isAllLetters = true;
 
             foreach (char character in i_StrToCheck)
             {
-                if (!Char.IsLetter(character))
+                if (!char.IsLetter(character))
                 {
                     isAllLetters = false;
                     break;

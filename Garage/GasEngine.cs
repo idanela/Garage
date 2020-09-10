@@ -1,5 +1,4 @@
-﻿
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public sealed class GasEngine : Engine
     {
@@ -18,7 +17,6 @@ namespace Ex03.GarageLogic
             Octan95,
             Soler
         }
-
 
         // Constructors:
         public GasEngine(float i_MaxCapacity, eGasType i_GasType) : base(i_MaxCapacity)
@@ -40,7 +38,6 @@ namespace Ex03.GarageLogic
         {
             return r_GasType == i_GasType;
         }
-
 
         // Object Overrides:
         public override string ToString()

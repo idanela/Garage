@@ -1,12 +1,11 @@
-﻿
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public struct Wheel
     {
         // Data Members:
+        private readonly float r_MaxAirPressure;
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;
-        private readonly float r_MaxAirPressure;
 
         // Enums:
         public enum eWheelsPerVehicle
@@ -38,6 +37,7 @@ namespace Ex03.GarageLogic
             {
                 return m_ManufacturerName;
             }
+
             set
             {
                 m_ManufacturerName = value;
@@ -50,6 +50,7 @@ namespace Ex03.GarageLogic
             {
                 return m_CurrentAirPressure;
             }
+
             set
             {
                 m_CurrentAirPressure = value;
@@ -63,8 +64,6 @@ namespace Ex03.GarageLogic
                 return r_MaxAirPressure;
             }
         }
-
-
 
         // Methods:
         public void InflateWheel(float i_AirPressure)
@@ -85,7 +84,7 @@ namespace Ex03.GarageLogic
             return string.Format(
 @"
 Manufacturer: {0}.
-AirPressure: {1}.",
+Air pressure: {1}.",
 Manufacturer,
 CurrentAirPressure);
         }

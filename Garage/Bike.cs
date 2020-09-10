@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 namespace Ex03.GarageLogic
 {
     public sealed class Bike : Vehicle
@@ -22,16 +23,16 @@ namespace Ex03.GarageLogic
             AddWheels();
         }
 
-        //Properties
-        public eLicenseType LicenceType
+        // Properties
+        public eLicenseType LicenseType
         {
             get
             {
                 return m_LicenseType;
             }
+
             set
             {
-
                 if (!Enum.IsDefined(typeof(eLicenseType), value))
                 {
                     throw new ArgumentException("value is not one of the options ");
@@ -52,7 +53,7 @@ namespace Ex03.GarageLogic
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("Trunk volume can not be negative");
+                    throw new ArgumentException("Trunk volume can not be negative or zero");
                 }
                 
                 m_EngineVolume = value;
@@ -91,13 +92,14 @@ namespace Ex03.GarageLogic
             isValidinput = int.TryParse(i_EngineVolume, out volume);
             if (!isValidinput)
             {
-                throw new FormatException(string.Format("{0} is not parsable to integer",i_EngineVolume));
+                throw new FormatException("Not a valid input for engine volume.");
             }
 
-            m_EngineVolume = volume;
+            EngineVolume = volume;
 
             return isValidinput;
         }
+
         private bool setLicenseType(string i_LicenseType)
         {
             eLicenseType licenseType;
@@ -105,19 +107,19 @@ namespace Ex03.GarageLogic
 
             if(!Enum.TryParse(i_LicenseType, out licenseType))
             {
-                throw new FormatException("Not parsable to licsenes type");
+                throw new FormatException("Not a valid input for licensne type.");
             }
 
             isValidinput = Enum.IsDefined(typeof(eLicenseType), licenseType);
             if (isValidinput)
             {
-                m_LicenseType = licenseType;
+                LicenseType = licenseType;
             }
 
             return isValidinput;
         }
 
-        public override List<string> GetMessagesAndParams()
+        public override List<string> GetMessagesAboutParams()
         {
             List<string> request = new List<string>();
 
@@ -131,13 +133,16 @@ namespace Ex03.GarageLogic
 
             return request;
         }
+
         public override string ToString()
         {
-            return base.ToString() + string.Format(@"
+            return base.ToString() + string.Format(
+                @"
 EngineVolume: {0}
 License kind: {1}
 ",
-m_EngineVolume,m_LicenseType);
+m_EngineVolume,
+m_LicenseType);
         }
     }
 }

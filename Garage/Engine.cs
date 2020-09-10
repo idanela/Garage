@@ -1,11 +1,10 @@
-﻿
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public abstract class Engine
     {
         // Data Member:
-        protected float m_CurrentAmountOfEnergy;
         protected readonly float r_MaxCapacityEnergy;
+        protected float m_CurrentAmountOfEnergy;
 
         // Enums:
         public enum eEngineType
@@ -28,6 +27,7 @@ namespace Ex03.GarageLogic
             {
                 return m_CurrentAmountOfEnergy;
             }
+
             set
             {
                 m_CurrentAmountOfEnergy = value;
