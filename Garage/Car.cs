@@ -81,17 +81,17 @@ namespace Ex03.GarageLogic
 
             if (i_IndexOfInput == 0)
             {
-                isValid = SetNumOfDoors(i_InputsFromUser);
+                isValid = setNumOfDoors(i_InputsFromUser);
             }
             else
             {
-                isValid = SetColorOfCar(i_InputsFromUser);
+                isValid = setColorOfCar(i_InputsFromUser);
             }
 
             return isValid;
         }
 
-        public bool SetNumOfDoors(string i_NumOfDoors)
+        private bool setNumOfDoors(string i_NumOfDoors)
         {
             eNumOfDoors numOfDoors;
             bool isValidinput = false;
@@ -110,7 +110,7 @@ namespace Ex03.GarageLogic
             return isValidinput;
         }
 
-        public bool SetColorOfCar(string i_ColorOfCar)
+        private bool setColorOfCar(string i_ColorOfCar)
         {
             eColorOfCar colorOfCar;
             bool isValidinput = false;
